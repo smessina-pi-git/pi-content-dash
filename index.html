@@ -310,6 +310,13 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
 .sync-dot.offline { background: var(--text-muted); }
 .sync-dot.idle    { background: var(--text-muted); }
 
+/* AUTH LOCK */
+.btn-lock { font-size: 11px; }
+.btn-lock.unlocked { background: rgba(61,255,143,0.08); border-color: var(--green-dim); color: var(--green); }
+.btn-lock.unlocked:hover { background: rgba(61,255,143,0.15); color: var(--green); border-color: var(--green); }
+body.locked .f-int { display: none; }
+body.locked .admin-only { display: none !important; }
+
 /* SETTINGS MODAL */
 .setup-steps { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
 .setup-step { display: flex; gap: 10px; align-items: flex-start; font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
@@ -345,9 +352,10 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
   <button class="nav-tab" data-view="pipeline" onclick="switchView('pipeline')"><span class="tab-icon">▤</span>Full Pipeline<span class="badge" id="badge-pipeline">0</span></button>
   <div class="nav-right">
     <button class="btn btn-sm" onclick="syncFromSheets()" id="sync-btn" title="Pull latest from Google Sheets">↻ Sync</button>
-    <button class="btn primary" onclick="openImportModal()">⊕ Import CSV</button>
-    <button class="btn" onclick="openAddModal()">+ Add Item</button>
-    <button class="btn" onclick="openSettings()" title="Google Sheets connection">⚙ Sheets</button>
+    <button class="btn primary admin-only" id="btn-import" onclick="openImportModal()">⊕ Import CSV</button>
+    <button class="btn admin-only" id="btn-add" onclick="openAddModal()">+ Add Item</button>
+    <button class="btn admin-only" id="btn-settings" onclick="openSettings()" title="Google Sheets connection">⚙ Sheets</button>
+    <button class="btn btn-lock" id="btn-lock" onclick="toggleLock()" title="Internal access">🔒 Internal</button>
   </div>
 </div>
 
@@ -692,6 +700,32 @@ The Future of Talent Acquisition,PAN Blast,Published,Sarah K.,2026-04-28,Blog,Ta
   </div>
 </div>
 
+<!-- ═══ INTERNAL LOCK MODAL ═══ -->
+<div id="modal-lock" class="modal-overlay">
+  <div class="modal orange-border" style="width:380px">
+    <div class="modal-header">
+      <div class="dot warn"></div>
+      <div class="modal-title">🔒 INTERNAL ACCESS</div>
+      <button class="modal-close" onclick="closeModal('modal-lock')">✕</button>
+    </div>
+    <div class="modal-body" style="text-align:center;padding:28px 24px">
+      <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);margin-bottom:20px;line-height:1.7">
+        Enter access code to unlock internal team data<br>and editing controls.
+      </div>
+      <div class="form-group" style="margin-bottom:8px">
+        <input type="password" class="form-input" id="lock-pw" placeholder="ACCESS CODE"
+          style="text-align:center;letter-spacing:6px;font-size:16px"
+          onkeydown="if(event.key==='Enter')submitLock()">
+      </div>
+      <div id="lock-error" style="display:none;font-family:var(--font-mono);font-size:11px;color:var(--red);margin-top:10px">⚠ INCORRECT ACCESS CODE</div>
+    </div>
+    <div class="modal-footer" style="justify-content:center;gap:12px">
+      <button class="btn" onclick="closeModal('modal-lock')">Cancel</button>
+      <button class="btn primary" onclick="submitLock()">UNLOCK</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ═══════════════════════════════════════════════════════
 //  DATA
@@ -863,7 +897,7 @@ function detailRowHtml(item, colspan) {
           <div class="detail-value">${liveLink}</div>
         </div>
         <div class="detail-field" style="display:flex;align-items:flex-end;gap:8px">
-          <button class="btn" style="font-size:10px;padding:4px 10px" onclick="openEditItem(${item.id})">✎ Edit</button>
+          ${isAuthenticated() ? `<button class="btn" style="font-size:10px;padding:4px 10px" onclick="openEditItem(${item.id})">✎ Edit</button>` : ''}
         </div>
       </div>
     </td>
@@ -878,11 +912,12 @@ function expandBtnCell(id) {
 //  RENDER: STATS
 // ═══════════════════════════════════════════════════════
 function renderStats() {
-  const pub   = data.filter(d => d.status === 'Published').length;
-  const inProd= data.filter(d => d.status === 'In Production' || d.status === 'In Review').length;
-  const upc   = data.filter(d => d.status === 'Upcoming').length;
-  const plan  = data.filter(d => d.status === 'Planned').length;
-  const total = data.length;
+  const visible = isAuthenticated() ? data : data.filter(d => d.team !== 'Internal');
+  const pub   = visible.filter(d => d.status === 'Published').length;
+  const inProd= visible.filter(d => d.status === 'In Production' || d.status === 'In Review').length;
+  const upc   = visible.filter(d => d.status === 'Upcoming').length;
+  const plan  = visible.filter(d => d.status === 'Planned').length;
+  const total = visible.length;
 
   document.getElementById('stats-row').innerHTML = `
     <div class="stat-card"><div class="stat-label">In Production</div><div class="stat-value" style="color:var(--green)">${inProd}</div><div class="stat-sub">being built now</div></div>
@@ -900,9 +935,9 @@ function renderStats() {
   `;
 
   document.getElementById('badge-blogs').textContent =
-    data.filter(d => d.format === 'Blog' && d.status !== 'Published').length;
+    visible.filter(d => d.format === 'Blog' && d.status !== 'Published').length;
   document.getElementById('badge-pipeline').textContent =
-    data.filter(d => d.status !== 'Published').length;
+    visible.filter(d => d.status !== 'Published').length;
 }
 
 // ═══════════════════════════════════════════════════════
@@ -910,7 +945,9 @@ function renderStats() {
 // ═══════════════════════════════════════════════════════
 function renderTeamNodes() {
   const grid = document.getElementById('teams-grid');
-  grid.innerHTML = ['PAN Blast','97th Floor','Internal'].map(teamName => {
+  const teamList = isAuthenticated() ? ['PAN Blast','97th Floor','Internal'] : ['PAN Blast','97th Floor'];
+  grid.style.gridTemplateColumns = `repeat(${teamList.length}, 1fr)`;
+  grid.innerHTML = teamList.map(teamName => {
     const t = teamMeta(teamName);
     const all = data.filter(d => d.team === teamName);
     const inProd = all.filter(d => d.status === 'In Production' || d.status === 'In Review');
@@ -972,6 +1009,7 @@ function renderTeamNodes() {
 function renderQueueTable() {
   const items = data
     .filter(d => d.status !== 'Published' && d.status !== 'Planned')
+    .filter(d => isAuthenticated() || d.team !== 'Internal')
     .sort((a,b) => (itemDate(a)||'9999').localeCompare(itemDate(b)||'9999'));
 
   document.getElementById('queue-subtitle').textContent = `${items.length} active items`;
@@ -1004,6 +1042,7 @@ function renderQueueTable() {
 function renderBlogView() {
   const pubBlogs = data
     .filter(d => d.status === 'Published')
+    .filter(d => isAuthenticated() || d.team !== 'Internal')
     .sort((a,b) => (itemDate(b)||'').localeCompare(itemDate(a)||''))
     .slice(0, 5);
 
@@ -1045,6 +1084,7 @@ function renderBlogView() {
 
   const upcomingBlogs = data
     .filter(d => d.format === 'Blog' && d.status !== 'Published')
+    .filter(d => isAuthenticated() || d.team !== 'Internal')
     .sort((a,b) => {
       const so = { 'In Production':0,'In Review':1,'Upcoming':2,'Planned':3 };
       const diff = (so[a.status]||5) - (so[b.status]||5);
@@ -1098,7 +1138,7 @@ function setPipelineStatusFilter(val) {
 }
 
 function renderPipeline() {
-  let items = [...data];
+  let items = data.filter(d => isAuthenticated() || d.team !== 'Internal');
   if (pipeTeamFilter !== 'all') items = items.filter(d => d.team === pipeTeamFilter);
   if (pipeStatusFilter) items = items.filter(d => d.status === pipeStatusFilter);
   const statusOrder = { 'In Production':0,'In Review':1,'Upcoming':2,'Planned':3,'Published':4 };
@@ -1138,11 +1178,12 @@ function renderPipeline() {
 //  TICKER
 // ═══════════════════════════════════════════════════════
 function renderTicker() {
+  const td = isAuthenticated() ? data : data.filter(d => d.team !== 'Internal');
   const snippets = [
-    ...data.filter(d => d.status==='In Production').map(d => `⚙ IN PRODUCTION: ${d.title} [${d.team}]${d.progress?` — ${d.progress}%`:''}`),
-    ...data.filter(d => d.status==='In Review').map(d => `⬡ IN REVIEW: ${d.title} [${d.team}]`),
-    ...data.filter(d => d.status==='Published').slice(0,3).map(d => `✓ LIVE: ${d.title} — ${fmtDate(itemDate(d))}`),
-    ...data.filter(d => d.status==='Upcoming').slice(0,4).map(d => `◆ UPCOMING: ${d.title} — Due ${fmtDate(itemDate(d))}`),
+    ...td.filter(d => d.status==='In Production').map(d => `⚙ IN PRODUCTION: ${d.title} [${d.team}]${d.progress?` — ${d.progress}%`:''}`),
+    ...td.filter(d => d.status==='In Review').map(d => `⬡ IN REVIEW: ${d.title} [${d.team}]`),
+    ...td.filter(d => d.status==='Published').slice(0,3).map(d => `✓ LIVE: ${d.title} — ${fmtDate(itemDate(d))}`),
+    ...td.filter(d => d.status==='Upcoming').slice(0,4).map(d => `◆ UPCOMING: ${d.title} — Due ${fmtDate(itemDate(d))}`),
   ];
   const html = snippets.map(s => `<span class="ticker-item">${s}<span class="ticker-sep"> ⟡ </span></span>`).join('');
   document.getElementById('ticker-inner').innerHTML = html + html;
@@ -1368,6 +1409,56 @@ function deleteCurrentItem() {
 }
 
 // ═══════════════════════════════════════════════════════
+//  AUTH — INTERNAL ACCESS GATE
+// ═══════════════════════════════════════════════════════
+const INTERNAL_PW_HASH = '85b42e1702877c851eb7412fe958c8fb447c3207b4798fadab42ea8539046ce1';
+
+async function _hashPw(pw) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+function isAuthenticated() { return sessionStorage.getItem('cf_auth') === '1'; }
+
+async function submitLock() {
+  const pw = document.getElementById('lock-pw').value;
+  if (!pw) return;
+  const hash = await _hashPw(pw);
+  if (hash === INTERNAL_PW_HASH) {
+    sessionStorage.setItem('cf_auth', '1');
+    document.getElementById('lock-pw').value = '';
+    document.getElementById('lock-error').style.display = 'none';
+    closeModal('modal-lock');
+    renderAll();
+  } else {
+    document.getElementById('lock-error').style.display = '';
+    document.getElementById('lock-pw').value = '';
+    document.getElementById('lock-pw').focus();
+  }
+}
+
+function toggleLock() {
+  if (isAuthenticated()) {
+    sessionStorage.removeItem('cf_auth');
+    renderAll();
+  } else {
+    document.getElementById('lock-pw').value = '';
+    document.getElementById('lock-error').style.display = 'none';
+    openModal('modal-lock');
+  }
+}
+
+function updateAuthUI() {
+  const auth = isAuthenticated();
+  document.body.classList.toggle('locked', !auth);
+  const lockBtn = document.getElementById('btn-lock');
+  if (lockBtn) {
+    lockBtn.textContent = auth ? '🔓 Internal: Active' : '🔒 Internal';
+    lockBtn.classList.toggle('unlocked', auth);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
 //  RENDER ALL
 // ═══════════════════════════════════════════════════════
 function renderAll() {
@@ -1378,6 +1469,7 @@ function renderAll() {
   const active = document.querySelector('.view.active');
   if (active?.id === 'view-blogs') renderBlogView();
   if (active?.id === 'view-pipeline') renderPipeline();
+  updateAuthUI();
 }
 
 // ═══════════════════════════════════════════════════════
