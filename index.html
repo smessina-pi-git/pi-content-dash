@@ -4,485 +4,476 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Content Factory — PI Brand Marketing</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:       #0A0A0A;
-  --bg-card:  #111111;
-  --bg-hover: #161616;
-  --bg-in:    #0F0F0F;
-  --border:   #1E1E1E;
-  --border-hi:#2A2A2A;
-  --t1: #F0EDE6;
-  --t2: #8A8580;
-  --t3: #484542;
-  --t4: #242220;
-  --accent:     #FF3D20;
-  --accent-dim: rgba(255,61,32,0.10);
-  --green:      #30C96A;
-  --green-bg:   rgba(48,201,106,0.08);
-  --blue:       #4DA8FF;
-  --blue-bg:    rgba(77,168,255,0.08);
-  --yellow:     #F5A623;
-  --yellow-bg:  rgba(245,166,35,0.08);
-  --pan:        #FF6B35;
-  --pan-bg:     rgba(255,107,53,0.07);
-  --f97:        #4DA8FF;
-  --f97-bg:     rgba(77,168,255,0.07);
-  --int:        #30C96A;
-  --int-bg:     rgba(48,201,106,0.07);
-  --fd: 'Syne', sans-serif;
-  --fb: 'Outfit', sans-serif;
+  --bg:          #0E1019;
+  --sb-bg:       #090B14;
+  --card:        #161924;
+  --card-h:      #1C1F30;
+  --row-h:       rgba(255,255,255,0.025);
+  --border:      rgba(255,255,255,0.06);
+  --border-hi:   rgba(255,255,255,0.12);
+  --t1: #ECEEF8;
+  --t2: #7A7F9D;
+  --t3: #3E4260;
+  --t4: #1E2038;
+  --indigo:      #7B6FFF;
+  --indigo-dim:  rgba(123,111,255,0.12);
+  --indigo-glow: rgba(123,111,255,0.20);
+  --green:       #0FD99A;
+  --green-dim:   rgba(15,217,154,0.10);
+  --blue:        #3D9EFF;
+  --blue-dim:    rgba(61,158,255,0.10);
+  --amber:       #F5A623;
+  --amber-dim:   rgba(245,166,35,0.10);
+  --pub:         #A78BFA;
+  --pub-dim:     rgba(167,139,250,0.10);
+  --pan:         #FF6B35;
+  --pan-dim:     rgba(255,107,53,0.10);
+  --f97:         #3D9EFF;
+  --f97-dim:     rgba(61,158,255,0.10);
+  --int:         #0FD99A;
+  --int-dim:     rgba(15,217,154,0.10);
+  --red:         #FF5757;
+  --fd: 'Manrope', sans-serif;
+  --fb: 'DM Sans', sans-serif;
   --fm: 'JetBrains Mono', monospace;
-  --hh: 52px;
-  --fh: 40px;
-  --bh: 32px;
+  --sb-w: 220px;
+  --tb-h: 56px;
+  --bb-h: 32px;
+  --r: 10px;
+  --r-sm: 6px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 14px; }
-body {
-  background: var(--bg);
-  color: var(--t1);
-  font-family: var(--fb);
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-size: 14px; overflow: hidden; display: flex; flex-direction: column; }
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-hi); }
+::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 3px; }
 
-/* ══ HEADER ══ */
-#hdr {
-  height: var(--hh);
+/* ═══ LAYOUT ═══ */
+#layout { display: flex; flex: 1; overflow: hidden; }
+
+/* ═══ SIDEBAR ═══ */
+#sidebar {
+  width: var(--sb-w);
+  background: var(--sb-bg);
+  border-right: 1px solid var(--border);
   display: flex;
-  align-items: center;
-  gap: 0;
-  padding: 0;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+.sb-logo {
+  padding: 20px 18px 16px;
   border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-  background: var(--bg);
-  z-index: 100;
 }
-.hdr-logo {
-  padding: 0 22px;
-  border-right: 1px solid var(--border);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.hdr-logo-main {
+.sb-logo-mark {
   font-family: var(--fd);
   font-weight: 800;
-  font-size: 12px;
-  letter-spacing: 0.10em;
+  font-size: 15px;
   color: var(--t1);
-  text-transform: uppercase;
+  letter-spacing: -0.02em;
   line-height: 1;
-}
-.hdr-logo-main em { font-style: normal; color: var(--accent); }
-.hdr-logo-sub {
-  font-family: var(--fm);
-  font-size: 8px;
-  color: var(--t3);
-  letter-spacing: 0.08em;
-  margin-top: 3px;
-  text-transform: uppercase;
-}
-.hdr-pills {
-  display: flex;
-  align-items: stretch;
-  height: 100%;
-  flex: 1;
-  overflow-x: auto;
-}
-.hdr-pills::-webkit-scrollbar { display: none; }
-.hdr-pill {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 18px;
-  border-right: 1px solid var(--border);
-  cursor: pointer;
-  transition: background 0.12s;
-  background: none;
-  border-top: none;
-  border-bottom: none;
-  border-left: none;
-  gap: 2px;
-  min-width: 72px;
-}
-.hdr-pill:hover { background: var(--bg-card); }
-.hdr-pill.pactive { background: var(--bg-card); }
-.hdr-pill .pill-n {
-  font-family: var(--fd);
-  font-weight: 800;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--t3);
-  transition: color 0.12s;
-}
-.hdr-pill.pactive .pill-n,
-.hdr-pill:hover .pill-n { color: var(--t1); }
-.hdr-pill.hp-prod  .pill-n { color: var(--green); }
-.hdr-pill.hp-rev   .pill-n { color: var(--blue); }
-.hdr-pill.hp-up    .pill-n { color: var(--yellow); }
-.hdr-pill.hp-plan  .pill-n { color: var(--t3); }
-.hdr-pill.hp-pub   .pill-n { color: var(--accent); }
-.hdr-pill .pill-lbl {
-  font-family: var(--fm);
-  font-size: 8px;
-  color: var(--t3);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.hdr-right {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 16px;
-  margin-left: auto;
-  border-left: 1px solid var(--border);
-  height: 100%;
+}
+.sb-logo-mark .logo-icon {
+  width: 28px; height: 28px;
+  background: var(--indigo);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
   flex-shrink: 0;
 }
-#sync-indicator {
+.sb-logo-sub {
+  font-family: var(--fm);
+  font-size: 9px;
+  color: var(--t3);
+  letter-spacing: 0.06em;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+.sb-nav { padding: 12px 10px; flex: 1; }
+.sb-section-label {
+  font-family: var(--fm);
+  font-size: 9px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--t3);
+  padding: 12px 8px 6px;
+}
+.nav-item {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-family: var(--fm);
-  font-size: 9px;
-  color: var(--t3);
-  white-space: nowrap;
-}
-.sync-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-.sync-dot.ok      { background: var(--green); }
-.sync-dot.syncing { background: var(--yellow); animation: blink 1s ease-in-out infinite; }
-.sync-dot.error   { background: var(--accent); }
-.sync-dot.offline, .sync-dot.idle { background: var(--t4); }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-#hdr-clock {
-  font-family: var(--fm);
-  font-size: 9px;
-  color: var(--t3);
-  white-space: nowrap;
-}
-
-/* ══ BUTTONS ══ */
-.btn {
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
   background: none;
-  border: 1px solid var(--border-hi);
+  border: none;
   color: var(--t2);
   font-family: var(--fb);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
-  padding: 5px 13px;
-  cursor: pointer;
-  transition: all 0.12s;
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  line-height: 1;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s;
+  margin-bottom: 2px;
 }
-.btn:hover { border-color: var(--t3); color: var(--t1); }
-.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-.btn.primary:hover { opacity: 0.85; }
-.btn.sm { padding: 4px 10px; font-size: 10px; }
-.btn-lock { font-size: 10px; }
-.btn-lock.unlocked { border-color: var(--int); color: var(--int); }
-.btn-lock.unlocked:hover { background: var(--int-bg); }
-
-/* ══ FILTER BAR ══ */
-#filterbar {
-  height: var(--fh);
-  display: flex;
-  align-items: center;
-  gap: 0;
-  padding: 0;
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-  background: var(--bg);
-  overflow-x: auto;
-}
-#filterbar::-webkit-scrollbar { display: none; }
-.fb-group {
-  display: flex;
-  align-items: center;
-  padding: 0 14px;
-  gap: 2px;
-  border-right: 1px solid var(--border);
-  height: 100%;
-}
-.fb-label {
-  font-family: var(--fm);
-  font-size: 8px;
-  color: var(--t4);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-right: 6px;
-  white-space: nowrap;
-}
-.chip {
-  background: none;
-  border: 1px solid transparent;
-  color: var(--t3);
-  font-family: var(--fb);
-  font-size: 11px;
-  font-weight: 500;
-  padding: 3px 10px;
-  cursor: pointer;
-  transition: all 0.10s;
-  border-radius: 2px;
-  white-space: nowrap;
-  line-height: 1.2;
-}
-.chip:hover { color: var(--t2); border-color: var(--border-hi); }
-.chip.cactive { color: var(--t1); border-color: var(--border-hi); background: var(--bg-card); }
-.chip.cpan.cactive  { color: var(--pan); border-color: var(--pan); background: var(--pan-bg); }
-.chip.cf97.cactive  { color: var(--f97); border-color: var(--f97); background: var(--f97-bg); }
-.chip.cint.cactive  { color: var(--int); border-color: var(--int); background: var(--int-bg); }
-.chip.cs-prod.cactive     { color: var(--green);  border-color: var(--green);  background: var(--green-bg); }
-.chip.cs-review.cactive   { color: var(--blue);   border-color: var(--blue);   background: var(--blue-bg); }
-.chip.cs-upcoming.cactive { color: var(--yellow); border-color: var(--yellow); background: var(--yellow-bg); }
-.chip.cs-pub.cactive      { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
-.fb-sync { padding: 0 14px; display: flex; align-items: center; margin-left: auto; }
-
-/* ══ MAIN SCROLL ══ */
-#main-scroll {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0 24px 32px;
-}
-
-/* ══ SECTIONS ══ */
-.section { margin-top: 32px; }
-.section.hidden { display: none; }
-.sec-head {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 16px;
-}
-.sec-title {
-  font-family: var(--fd);
-  font-weight: 800;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--t1);
-}
-.sec-count {
-  font-family: var(--fm);
-  font-size: 9px;
-  color: var(--t3);
-}
-.sec-note {
-  font-family: var(--fm);
-  font-size: 9px;
-  color: var(--t4);
-  margin-left: auto;
-}
-
-/* ══ ACTIVE CARDS (In Production / In Review) ══ */
-#active-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1px;
-  background: var(--border);
-}
-.ac-card {
-  background: var(--bg-card);
-  padding: 16px 18px;
-  cursor: pointer;
-  transition: background 0.10s;
-  border-left: 3px solid transparent;
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-  min-height: 120px;
-}
-.ac-card:hover { background: var(--bg-hover); }
-.ac-card.tc-pan { border-left-color: var(--pan); }
-.ac-card.tc-f97 { border-left-color: var(--f97); }
-.ac-card.tc-int { border-left-color: var(--int); }
-.ac-card.in-review.tc-pan { animation: rpan 3s ease-in-out infinite; }
-.ac-card.in-review.tc-f97 { animation: rf97 3s ease-in-out infinite; }
-.ac-card.in-review.tc-int { animation: rint 3s ease-in-out infinite; }
-@keyframes rpan { 0%,100%{border-left-color:var(--pan)} 50%{border-left-color:var(--blue)} }
-@keyframes rf97 { 0%,100%{border-left-color:var(--f97)} 50%{border-left-color:var(--blue)} }
-@keyframes rint { 0%,100%{border-left-color:var(--int)} 50%{border-left-color:var(--blue)} }
-.ac-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-.ac-title {
-  font-family: var(--fb);
-  font-weight: 600;
+.nav-item:hover { background: rgba(255,255,255,0.04); color: var(--t1); }
+.nav-item.nav-active { background: var(--indigo-dim); color: var(--t1); font-weight: 600; }
+.nav-item.nav-active .nav-icon-box { background: var(--indigo); color: #fff; }
+.nav-icon-box {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
   font-size: 12px;
-  line-height: 1.4;
-  color: var(--t1);
-  flex: 1;
+  flex-shrink: 0;
+  transition: background 0.15s;
 }
-.ac-mid {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-left: 1px;
 }
-.ac-bottom {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: auto;
+.nd-pan { background: var(--pan); }
+.nd-f97 { background: var(--f97); }
+.nd-int { background: var(--int); }
+.nav-badge {
+  margin-left: auto;
+  background: rgba(255,255,255,0.07);
+  color: var(--t2);
+  font-family: var(--fm);
+  font-size: 9px;
+  padding: 1px 6px;
+  border-radius: 10px;
 }
-.ac-prog {
-  flex: 1;
+.nav-item.nav-active .nav-badge { background: var(--indigo-glow); color: var(--indigo); }
+.sb-bottom {
+  padding: 10px 10px 14px;
+  border-top: 1px solid var(--border);
+}
+.sb-sync-row {
   display: flex;
   align-items: center;
   gap: 7px;
+  padding: 8px 10px;
+  margin-bottom: 2px;
 }
-.prog-bar { flex: 1; height: 2px; background: var(--border-hi); overflow: hidden; }
-.prog-fill { height: 100%; transition: width 0.5s; }
-.prog-fill.tc-pan { background: var(--pan); }
-.prog-fill.tc-f97 { background: var(--f97); }
-.prog-fill.tc-int { background: var(--int); }
-.prog-pct { font-family: var(--fm); font-size: 9px; color: var(--t3); min-width: 24px; text-align: right; }
-.ac-owner { font-family: var(--fm); font-size: 9px; color: var(--t3); white-space: nowrap; }
-.ac-date  { font-family: var(--fm); font-size: 9px; color: var(--t3); white-space: nowrap; }
-.ac-date.overdue { color: var(--accent); }
-.ac-date.soon    { color: var(--yellow); }
+.sync-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.sync-dot.ok      { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.sync-dot.syncing { background: var(--amber); animation: pulse 1s ease-in-out infinite; }
+.sync-dot.error   { background: var(--red); }
+.sync-dot.offline, .sync-dot.idle { background: var(--t4); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+#sync-lbl { font-family: var(--fm); font-size: 10px; color: var(--t3); }
 
-/* ══ STATUS BADGES ══ */
-.sb {
+/* ═══ MAIN WRAP ═══ */
+#main-wrap { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+/* ═══ TOPBAR ═══ */
+#topbar {
+  height: var(--tb-h);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  gap: 12px;
+}
+#page-title { font-family: var(--fd); font-weight: 700; font-size: 16px; color: var(--t1); flex: 1; }
+.tb-right { display: flex; align-items: center; gap: 8px; }
+#tb-clock { font-family: var(--fm); font-size: 10px; color: var(--t3); white-space: nowrap; margin-right: 4px; }
+
+/* ═══ BUTTONS ═══ */
+.btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border-hi);
+  color: var(--t2);
+  font-family: var(--fb);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: all 0.15s;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-family: var(--fm);
-  font-size: 8px;
-  padding: 2px 7px;
-  border-radius: 2px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  letter-spacing: 0.04em;
-}
-.sb-prod     { background: var(--green-bg);  color: var(--green); }
-.sb-review   { background: var(--blue-bg);   color: var(--blue); }
-.sb-upcoming { background: var(--yellow-bg); color: var(--yellow); }
-.sb-planned  { color: var(--t3); border: 1px solid var(--border); }
-.sb-pub      { background: var(--accent-dim); color: var(--accent); }
-
-/* ══ TEAM BADGES ══ */
-.tb {
-  font-family: var(--fm);
-  font-size: 8px;
-  padding: 2px 6px;
-  border-radius: 2px;
-  white-space: nowrap;
-  letter-spacing: 0.04em;
-}
-.tb-pan { background: var(--pan-bg); color: var(--pan); }
-.tb-f97 { background: var(--f97-bg); color: var(--f97); }
-.tb-int { background: var(--int-bg); color: var(--int); }
-
-/* ══ FORMAT BADGE ══ */
-.fb-tag {
-  font-family: var(--fm);
-  font-size: 8px;
-  color: var(--t4);
-  padding: 2px 5px;
-  border: 1px solid var(--border);
-  border-radius: 2px;
+  gap: 6px;
   white-space: nowrap;
 }
+.btn:hover { background: rgba(255,255,255,0.09); color: var(--t1); border-color: var(--border-hi); }
+.btn.primary { background: var(--indigo); border-color: var(--indigo); color: #fff; font-weight: 600; }
+.btn.primary:hover { background: #8E83FF; border-color: #8E83FF; }
+.btn.sm { padding: 5px 11px; font-size: 11px; }
+.btn-lock { font-size: 11px; }
+.btn-lock.unlocked { background: var(--int-dim); border-color: var(--int); color: var(--int); }
 
-/* ══ QUEUE LIST (Upcoming + Planned) ══ */
-#queue-list { display: flex; flex-direction: column; }
-.q-row {
+/* ═══ CONTENT SCROLL ═══ */
+#content-scroll { flex: 1; overflow-y: auto; padding: 24px; }
+
+/* ═══ METRIC CARDS ═══ */
+.metrics-row {
   display: grid;
-  grid-template-columns: 3px 1fr 88px 80px 92px 80px;
-  align-items: center;
-  gap: 0 16px;
-  padding: 10px 14px 10px 11px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  transition: background 0.10s;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
 }
-.q-row:hover { background: var(--bg-card); }
-.q-row:first-child { border-top: 1px solid var(--border); }
-.q-accent { height: 28px; border-radius: 1px; }
-.q-accent.tc-pan { background: var(--pan); }
-.q-accent.tc-f97 { background: var(--f97); }
-.q-accent.tc-int { background: var(--int); }
-.q-title { font-size: 12px; font-weight: 500; color: var(--t1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.q-team  { text-align: left; }
-.q-date  { font-family: var(--fm); font-size: 9px; color: var(--t3); text-align: right; }
-.q-date.overdue { color: var(--accent); }
-.q-date.soon    { color: var(--yellow); }
-.q-status { text-align: right; }
-.q-owner { font-family: var(--fm); font-size: 9px; color: var(--t3); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-/* ══ PUBLISHED GRID ══ */
-#pub-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 10px;
-}
-.pub-card {
-  background: var(--bg-card);
+.metric-card {
+  background: var(--card);
   border: 1px solid var(--border);
-  padding: 16px;
-  cursor: pointer;
-  transition: border-color 0.12s;
+  border-radius: var(--r);
+  padding: 18px 18px 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  transition: border-color 0.15s, transform 0.15s;
+  cursor: pointer;
 }
-.pub-card:hover { border-color: var(--border-hi); }
-.pub-title { font-family: var(--fb); font-weight: 600; font-size: 12px; line-height: 1.4; color: var(--t1); }
-.pub-meta  { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.pub-desc  { font-size: 11px; color: var(--t2); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.pub-foot  { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 4px; flex-wrap: wrap; }
-.pub-pv    { font-family: var(--fm); font-size: 9px; color: var(--t3); margin-left: auto; }
-.pub-pv strong { color: var(--t1); font-weight: 500; }
-.pub-link  { font-family: var(--fm); font-size: 9px; color: var(--t3); text-decoration: none; transition: color 0.10s; }
-.pub-link:hover { color: var(--t1); }
+.metric-card:hover { border-color: var(--border-hi); transform: translateY(-1px); }
+.metric-card.m-active { border-color: var(--indigo); background: var(--indigo-dim); }
+.metric-top { display: flex; align-items: center; justify-content: space-between; }
+.metric-icon {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.mi-prod   { background: var(--green-dim);  color: var(--green); }
+.mi-review { background: var(--blue-dim);   color: var(--blue); }
+.mi-up     { background: var(--amber-dim);  color: var(--amber); }
+.mi-plan   { background: rgba(255,255,255,0.05); color: var(--t3); }
+.mi-pub    { background: var(--pub-dim);    color: var(--pub); }
+.metric-num {
+  font-family: var(--fd);
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.mn-prod   { color: var(--green); }
+.mn-review { color: var(--blue); }
+.mn-up     { color: var(--amber); }
+.mn-plan   { color: var(--t2); }
+.mn-pub    { color: var(--pub); }
+.metric-label { font-size: 12px; color: var(--t2); font-weight: 500; }
 
-/* ══ EMPTY STATE ══ */
-.empty-st {
-  padding: 32px 20px;
+/* ═══ DASHBOARD GRID ═══ */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.section-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.sc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.sc-title {
+  font-family: var(--fd);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--t1);
+}
+.sc-count {
   font-family: var(--fm);
   font-size: 10px;
-  color: var(--t4);
-  text-align: center;
-  grid-column: 1 / -1;
+  color: var(--t3);
+  background: rgba(255,255,255,0.05);
+  padding: 2px 8px;
+  border-radius: 10px;
 }
 
-/* ══ BOTTOM TICKER ══ */
+/* ═══ ACTIVE CARDS GRID ═══ */
+.active-cards { display: flex; flex-direction: column; }
+.ac-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.12s;
+  position: relative;
+}
+.ac-card:last-child { border-bottom: none; }
+.ac-card:hover { background: var(--row-h); }
+.ac-stripe {
+  width: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+.ac-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+.ac-title { font-size: 13px; font-weight: 600; color: var(--t1); line-height: 1.35; }
+.ac-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.ac-prog-row { display: flex; align-items: center; gap: 8px; }
+.ac-prog-bar { flex: 1; height: 3px; background: var(--border-hi); border-radius: 2px; overflow: hidden; }
+.ac-prog-fill { height: 100%; border-radius: 2px; }
+.fill-pan { background: var(--pan); }
+.fill-f97 { background: var(--f97); }
+.fill-int { background: var(--int); }
+.ac-prog-pct { font-family: var(--fm); font-size: 9px; color: var(--t3); width: 26px; text-align: right; }
+.ac-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.ac-date { font-family: var(--fm); font-size: 10px; color: var(--t3); }
+.ac-date.overdue { color: var(--red); }
+.ac-date.soon    { color: var(--amber); }
+
+/* ═══ TEAM / STATUS BADGES ═══ */
+.tb { font-family: var(--fm); font-size: 9px; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+.tb-pan { background: var(--pan-dim); color: var(--pan); }
+.tb-f97 { background: var(--f97-dim); color: var(--f97); }
+.tb-int { background: var(--int-dim); color: var(--int); }
+.fb-tag { font-family: var(--fm); font-size: 9px; color: var(--t3); padding: 2px 6px; border: 1px solid var(--border); border-radius: 10px; }
+.sb-badge { font-family: var(--fm); font-size: 9px; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+.sb-prod   { background: var(--green-dim); color: var(--green); }
+.sb-review { background: var(--blue-dim);  color: var(--blue); }
+.sb-up     { background: var(--amber-dim); color: var(--amber); }
+.sb-plan   { background: rgba(255,255,255,0.05); color: var(--t3); }
+.sb-pub    { background: var(--pub-dim);   color: var(--pub); }
+
+/* ═══ UP NEXT LIST ═══ */
+.up-next-list { display: flex; flex-direction: column; }
+.un-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.un-row:last-child { border-bottom: none; }
+.un-row:hover { background: var(--row-h); }
+.un-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.un-title { font-size: 12px; font-weight: 500; color: var(--t1); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.un-date { font-family: var(--fm); font-size: 9px; color: var(--t3); white-space: nowrap; }
+
+/* ═══ PUBLISHED SECTION ═══ */
+#sec-pub { margin-bottom: 8px; }
+.pub-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.pub-head-title { font-family: var(--fd); font-weight: 700; font-size: 13px; color: var(--t1); }
+.pub-head-count { font-family: var(--fm); font-size: 10px; color: var(--t3); }
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.pub-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pub-card:hover { border-color: var(--border-hi); transform: translateY(-1px); }
+.pub-card-top { display: flex; gap: 10px; align-items: flex-start; }
+.pub-color-strip { width: 3px; border-radius: 2px; flex-shrink: 0; align-self: stretch; min-height: 40px; }
+.pub-title { font-size: 12px; font-weight: 600; color: var(--t1); line-height: 1.4; flex: 1; }
+.pub-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.pub-desc { font-size: 11px; color: var(--t2); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pub-foot { display: flex; align-items: center; gap: 8px; }
+.pub-pv { font-family: var(--fm); font-size: 10px; color: var(--t2); margin-left: auto; }
+.pub-pv strong { color: var(--t1); font-weight: 600; }
+.pub-link { font-family: var(--fm); font-size: 9px; color: var(--indigo); text-decoration: none; }
+.pub-link:hover { text-decoration: underline; }
+
+/* ═══ PIPELINE VIEW ═══ */
+#view-pipeline { display: none; }
+.pl-filter-bar { display: flex; align-items: center; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+.pl-label { font-family: var(--fm); font-size: 9px; color: var(--t3); letter-spacing: 0.08em; text-transform: uppercase; margin-right: 2px; }
+.pl-chip {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--t3);
+  font-family: var(--fb);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.pl-chip:hover { color: var(--t2); border-color: var(--border-hi); }
+.pl-chip.cactive { color: var(--t1); border-color: var(--border-hi); background: rgba(255,255,255,0.08); }
+.pl-chip.cactive.cpan { color: var(--pan); border-color: var(--pan); background: var(--pan-dim); }
+.pl-chip.cactive.cf97 { color: var(--f97); border-color: var(--f97); background: var(--f97-dim); }
+.pl-chip.cactive.cint { color: var(--int); border-color: var(--int); background: var(--int-dim); }
+.pl-sep { width: 1px; height: 16px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
+.pl-count { font-family: var(--fm); font-size: 10px; color: var(--t3); margin-left: auto; }
+
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table thead th {
+  font-family: var(--fm);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--t3);
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+  white-space: nowrap;
+}
+.data-table tbody tr { cursor: pointer; transition: background 0.10s; }
+.data-table tbody tr:hover td { background: var(--row-h); }
+.data-table tbody td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  font-size: 12px;
+}
+.data-table tbody tr:last-child td { border-bottom: none; }
+.col-title { color: var(--t1); font-weight: 500; max-width: 280px; }
+.col-title-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.col-mono { font-family: var(--fm); font-size: 10px; color: var(--t2); white-space: nowrap; }
+.col-date { font-family: var(--fm); font-size: 10px; color: var(--t2); white-space: nowrap; }
+.col-date.overdue { color: var(--red); }
+.col-date.soon    { color: var(--amber); }
+.tbl-prog { display: flex; align-items: center; gap: 7px; min-width: 80px; }
+.tbl-prog-bar { flex: 1; height: 3px; background: var(--border-hi); border-radius: 2px; overflow: hidden; }
+.tbl-prog-fill { height: 100%; border-radius: 2px; }
+.tbl-pv { font-family: var(--fm); font-size: 10px; color: var(--t2); text-align: right; }
+
+/* Table wrapper */
+.table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+
+/* ═══ EMPTY STATE ═══ */
+.empty-st { padding: 40px 20px; text-align: center; color: var(--t3); font-family: var(--fm); font-size: 11px; }
+
+/* ═══ BOTTOM TICKER ═══ */
 #bottombar {
-  height: var(--bh);
+  height: var(--bb-h);
   display: flex;
   align-items: center;
   border-top: 1px solid var(--border);
+  background: var(--sb-bg);
   flex-shrink: 0;
   overflow: hidden;
 }
-.dispatch-lbl {
-  background: var(--accent);
+.dispatch-label {
+  background: var(--indigo);
   color: #fff;
   font-family: var(--fm);
   font-size: 8px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 0 14px;
   height: 100%;
@@ -495,7 +486,7 @@ body {
   display: flex;
   gap: 48px;
   white-space: nowrap;
-  animation: tickScroll 45s linear infinite;
+  animation: tickScroll 50s linear infinite;
   font-family: var(--fm);
   font-size: 9px;
   color: var(--t3);
@@ -513,180 +504,268 @@ body {
   height: 100%;
   flex-shrink: 0;
 }
-.bb-count, .bb-date { font-family: var(--fm); font-size: 9px; color: var(--t4); white-space: nowrap; }
+.bb-stat { font-family: var(--fm); font-size: 9px; color: var(--t3); white-space: nowrap; }
 
-/* ══ MODALS ══ */
-.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; }
+/* ═══ MODALS ═══ */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.80); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
 .modal-overlay.open { display: flex; }
-.modal { background: #111; border: 1px solid var(--border-hi); width: 720px; max-width: 96vw; max-height: 88vh; display: flex; flex-direction: column; }
-.modal.modal-accent { border-color: var(--accent); box-shadow: 0 0 40px rgba(255,61,32,0.12); }
-.modal.modal-blue   { border-color: var(--blue);   box-shadow: 0 0 40px rgba(77,168,255,0.10); }
-.modal-header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-shrink: 0; background: rgba(0,0,0,0.2); }
-.modal-title { font-family: var(--fd); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--t1); flex: 1; }
-.modal-close { background: none; border: 1px solid var(--border); color: var(--t3); cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: all 0.12s; }
-.modal-close:hover { border-color: var(--accent); color: var(--accent); }
+.modal { background: #161924; border: 1px solid var(--border-hi); border-radius: var(--r); width: 720px; max-width: 96vw; max-height: 88vh; display: flex; flex-direction: column; box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+.modal.modal-indigo { border-color: var(--indigo); }
+.modal.modal-blue   { border-color: var(--blue); }
+.modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.modal-title { font-family: var(--fd); font-size: 14px; font-weight: 700; color: var(--t1); flex: 1; }
+.modal-close { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--t2); cursor: pointer; width: 28px; height: 28px; border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.12s; }
+.modal-close:hover { background: rgba(255,87,87,0.15); border-color: var(--red); color: var(--red); }
 .modal-body { padding: 20px; overflow-y: auto; flex: 1; }
 .modal-body::-webkit-scrollbar { width: 4px; }
-.modal-body::-webkit-scrollbar-thumb { background: var(--border-hi); }
-.modal-footer { padding: 12px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; flex-shrink: 0; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 2px; }
+.modal-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; flex-shrink: 0; }
 
 .form-group { margin-bottom: 14px; }
-.form-label { font-family: var(--fm); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--t3); display: block; margin-bottom: 5px; }
-.form-input, .form-select, .form-textarea { width: 100%; background: var(--bg-in); border: 1px solid var(--border-hi); color: var(--t1); font-family: var(--fm); font-size: 12px; padding: 7px 10px; outline: none; transition: border-color 0.12s; }
-.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
-.form-select option { background: #111; }
-.form-textarea { resize: vertical; min-height: 68px; line-height: 1.5; font-family: var(--fb); font-size: 12px; }
-.form-hint { font-family: var(--fm); font-size: 9px; color: var(--t3); margin-top: 4px; }
+.form-label { font-family: var(--fm); font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--t3); display: block; margin-bottom: 5px; }
+.form-input, .form-select, .form-textarea { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border-hi); color: var(--t1); font-family: var(--fb); font-size: 13px; padding: 8px 12px; border-radius: var(--r-sm); outline: none; transition: border-color 0.12s; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--indigo); }
+.form-select option { background: #1C1F30; }
+.form-textarea { resize: vertical; min-height: 72px; line-height: 1.5; font-size: 13px; }
+.form-hint { font-family: var(--fm); font-size: 10px; color: var(--t3); margin-top: 4px; }
 .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-.form-full { grid-column: 1 / -1; }
+.form-full { grid-column: 1/-1; }
 
-.col-chip { font-family: var(--fm); font-size: 9px; padding: 2px 8px; background: var(--bg-card); border: 1px solid var(--border); color: var(--t3); }
-.col-chip.req { border-color: var(--accent); color: var(--accent); }
-.columns-legend { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-.import-result { display: none; padding: 10px 14px; border: 1px solid var(--green); background: var(--green-bg); font-family: var(--fm); font-size: 11px; color: var(--green); margin-top: 14px; }
-.import-result.error { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+.col-chip { font-family: var(--fm); font-size: 9px; padding: 2px 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--t3); border-radius: 4px; }
+.col-chip.req { border-color: var(--indigo); color: var(--indigo); }
+.columns-legend { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.import-result { display: none; padding: 10px 14px; border: 1px solid var(--green); background: var(--green-dim); font-family: var(--fm); font-size: 11px; color: var(--green); border-radius: var(--r-sm); margin-top: 14px; }
+.import-result.error { border-color: var(--red); color: var(--red); background: rgba(255,87,87,0.07); }
 
-.setup-steps { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
-.setup-step { display: flex; gap: 10px; align-items: flex-start; font-family: var(--fm); font-size: 11px; color: var(--t3); }
-.setup-step-num { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(255,61,32,0.3); width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; flex-shrink: 0; }
-.setup-step-text { flex: 1; line-height: 1.6; }
-.setup-step-text code { background: var(--bg-card); border: 1px solid var(--border); padding: 1px 5px; color: var(--t1); font-size: 10px; }
-.gas-test-result { font-family: var(--fm); font-size: 11px; margin-top: 10px; padding: 8px 12px; display: none; }
-.gas-test-result.ok    { background: var(--green-bg); color: var(--green); border: 1px solid rgba(48,201,106,0.2); }
-.gas-test-result.error { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(255,61,32,0.2); }
+.setup-steps { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.setup-step { display: flex; gap: 12px; align-items: flex-start; }
+.setup-step-num { background: var(--indigo-dim); color: var(--indigo); border: 1px solid var(--indigo); width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; font-family: var(--fd); }
+.setup-step-text { font-family: var(--fb); font-size: 12px; color: var(--t2); line-height: 1.6; flex: 1; }
+.setup-step-text strong { color: var(--t1); }
+.setup-step-text code { background: rgba(0,0,0,0.4); border: 1px solid var(--border); padding: 1px 6px; color: var(--t1); font-size: 11px; border-radius: 4px; font-family: var(--fm); }
+.gas-test-result { font-family: var(--fm); font-size: 11px; margin-top: 10px; padding: 8px 12px; border-radius: var(--r-sm); display: none; }
+.gas-test-result.ok    { background: var(--green-dim); color: var(--green); border: 1px solid rgba(15,217,154,0.2); }
+.gas-test-result.error { background: rgba(255,87,87,0.07); color: var(--red); border: 1px solid rgba(255,87,87,0.2); }
 
-/* ══ AUTH ══ */
+/* ═══ AUTH ═══ */
 body.locked .admin-only { display: none !important; }
 body.locked .f-int { display: none !important; }
-body.locked .ac-card, body.locked .q-row, body.locked .pub-card { cursor: default; }
 </style>
 </head>
 <body>
 
-<!-- ═══ HEADER ═══ -->
-<div id="hdr">
-  <div class="hdr-logo">
-    <div class="hdr-logo-main">Content <em>Factory</em></div>
-    <div class="hdr-logo-sub">PI Brand Marketing</div>
-  </div>
-  <div class="hdr-pills">
-    <button class="hdr-pill hp-prod pactive" id="pill-prod" onclick="setStatusFilter('In Production')" title="In Production">
-      <span class="pill-n" id="pn-prod">0</span>
-      <span class="pill-lbl">Producing</span>
-    </button>
-    <button class="hdr-pill hp-rev" id="pill-rev" onclick="setStatusFilter('In Review')" title="In Review">
-      <span class="pill-n" id="pn-rev">0</span>
-      <span class="pill-lbl">In Review</span>
-    </button>
-    <button class="hdr-pill hp-up" id="pill-up" onclick="setStatusFilter('Upcoming')" title="Upcoming">
-      <span class="pill-n" id="pn-up">0</span>
-      <span class="pill-lbl">Upcoming</span>
-    </button>
-    <button class="hdr-pill hp-plan" id="pill-plan" onclick="setStatusFilter('Planned')" title="Planned">
-      <span class="pill-n" id="pn-plan">0</span>
-      <span class="pill-lbl">Planned</span>
-    </button>
-    <button class="hdr-pill hp-pub" id="pill-pub" onclick="setStatusFilter('Published')" title="Published">
-      <span class="pill-n" id="pn-pub">0</span>
-      <span class="pill-lbl">Published</span>
-    </button>
-  </div>
-  <div class="hdr-right">
-    <div id="sync-indicator"><span class="sync-dot idle"></span><span id="sync-lbl">—</span></div>
-    <div id="hdr-clock"></div>
-    <button class="btn btn-lock" id="btn-lock" onclick="toggleLock()">🔒 Internal</button>
-    <button class="btn primary admin-only" onclick="openAddModal()">+ Add</button>
-    <button class="btn admin-only" onclick="openSettings()" title="Sheets connection">⚙</button>
-  </div>
-</div>
+<div id="layout">
 
-<!-- ═══ FILTER BAR ═══ -->
-<div id="filterbar">
-  <div class="fb-group">
-    <span class="fb-label">Team</span>
-    <button class="chip cactive" data-team="all" onclick="setTeamFilter('all')">All</button>
-    <button class="chip cpan" data-team="PAN Blast" onclick="setTeamFilter('PAN Blast')">PAN Blast</button>
-    <button class="chip cf97" data-team="97th Floor" onclick="setTeamFilter('97th Floor')">97th Floor</button>
-    <button class="chip cint f-int" data-team="Internal" onclick="setTeamFilter('Internal')">Internal</button>
-  </div>
-  <div class="fb-group">
-    <span class="fb-label">Status</span>
-    <button class="chip cs-prod"     data-status="In Production" onclick="setStatusFilter('In Production')">Producing</button>
-    <button class="chip cs-review"   data-status="In Review"     onclick="setStatusFilter('In Review')">In Review</button>
-    <button class="chip cs-upcoming" data-status="Upcoming"      onclick="setStatusFilter('Upcoming')">Upcoming</button>
-    <button class="chip"             data-status="Planned"        onclick="setStatusFilter('Planned')">Planned</button>
-    <button class="chip cs-pub"      data-status="Published"      onclick="setStatusFilter('Published')">Published</button>
-  </div>
-  <div class="fb-sync">
-    <button class="btn sm" onclick="syncFromSheets()" id="sync-btn">↻ Sync</button>
-    <button class="btn sm admin-only" id="btn-import" onclick="openImportModal()" style="margin-left:6px">⊕ Import</button>
-  </div>
-</div>
-
-<!-- ═══ MAIN ═══ -->
-<div id="main-scroll">
-
-  <!-- In the Works -->
-  <div class="section" id="sec-active">
-    <div class="sec-head">
-      <span class="sec-title">In the Works</span>
-      <span class="sec-count" id="active-count">0 items</span>
-      <span class="sec-note">In Production + In Review</span>
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside id="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-mark">
+        <div class="logo-icon">◈</div>
+        Content Factory
+      </div>
+      <div class="sb-logo-sub">PI Brand Marketing</div>
     </div>
-    <div id="active-grid"></div>
-  </div>
 
-  <!-- Up Next -->
-  <div class="section" id="sec-queue">
-    <div class="sec-head">
-      <span class="sec-title">Up Next</span>
-      <span class="sec-count" id="queue-count">0 items</span>
-      <span class="sec-note">Upcoming + Planned</span>
+    <nav class="sb-nav">
+      <div class="sb-section-label">Workspace</div>
+      <button class="nav-item nav-active" data-view="dashboard" onclick="setView('dashboard')">
+        <span class="nav-icon-box">▦</span>
+        Dashboard
+      </button>
+      <button class="nav-item" data-view="pipeline" onclick="setView('pipeline')">
+        <span class="nav-icon-box">≡</span>
+        All Content
+        <span class="nav-badge" id="nb-all">—</span>
+      </button>
+
+      <div class="sb-section-label">Teams</div>
+      <button class="nav-item" data-view="pan" onclick="setView('pan')">
+        <span class="nav-dot nd-pan"></span>
+        PAN Blast
+        <span class="nav-badge" id="nb-pan">—</span>
+      </button>
+      <button class="nav-item" data-view="97f" onclick="setView('97f')">
+        <span class="nav-dot nd-f97"></span>
+        97th Floor
+        <span class="nav-badge" id="nb-97f">—</span>
+      </button>
+      <button class="nav-item f-int" data-view="int" onclick="setView('int')">
+        <span class="nav-dot nd-int"></span>
+        Internal
+        <span class="nav-badge" id="nb-int">—</span>
+      </button>
+    </nav>
+
+    <div class="sb-bottom">
+      <div class="sb-sync-row">
+        <span class="sync-dot idle" id="sync-dot"></span>
+        <span id="sync-lbl">not synced</span>
+      </div>
+      <button class="nav-item admin-only" onclick="openSettings()">
+        <span class="nav-icon-box">⚙</span>
+        Settings
+      </button>
     </div>
-    <div id="queue-list"></div>
-  </div>
+  </aside>
 
-  <!-- Published -->
-  <div class="section" id="sec-pub">
-    <div class="sec-head">
-      <span class="sec-title">Published</span>
-      <span class="sec-count" id="pub-count">0 items</span>
+  <!-- ═══ MAIN WRAP ═══ -->
+  <div id="main-wrap">
+
+    <!-- TOP BAR -->
+    <div id="topbar">
+      <div id="page-title">Dashboard</div>
+      <div class="tb-right">
+        <span id="tb-clock"></span>
+        <button class="btn sm" onclick="syncFromSheets()" id="sync-btn">↻ Sync</button>
+        <button class="btn sm admin-only" onclick="openImportModal()">⊕ Import</button>
+        <button class="btn primary sm admin-only" onclick="openAddModal()">+ Add</button>
+        <button class="btn btn-lock sm" id="btn-lock" onclick="toggleLock()">🔒 Internal</button>
+      </div>
     </div>
-    <div id="pub-grid"></div>
-  </div>
 
-</div><!-- /main-scroll -->
+    <!-- CONTENT SCROLL -->
+    <div id="content-scroll">
 
-<!-- ═══ BOTTOM BAR ═══ -->
+      <!-- ── DASHBOARD VIEW ── -->
+      <div id="view-dashboard">
+        <!-- Metric Cards -->
+        <div class="metrics-row">
+          <div class="metric-card" onclick="filterByStatus('In Production')">
+            <div class="metric-top">
+              <div class="metric-icon mi-prod">●</div>
+              <span class="metric-num mn-prod" id="mn-prod">0</span>
+            </div>
+            <div class="metric-label">In Production</div>
+          </div>
+          <div class="metric-card" onclick="filterByStatus('In Review')">
+            <div class="metric-top">
+              <div class="metric-icon mi-review">◈</div>
+              <span class="metric-num mn-review" id="mn-review">0</span>
+            </div>
+            <div class="metric-label">In Review</div>
+          </div>
+          <div class="metric-card" onclick="filterByStatus('Upcoming')">
+            <div class="metric-top">
+              <div class="metric-icon mi-up">◆</div>
+              <span class="metric-num mn-up" id="mn-up">0</span>
+            </div>
+            <div class="metric-label">Upcoming</div>
+          </div>
+          <div class="metric-card" onclick="filterByStatus('Planned')">
+            <div class="metric-top">
+              <div class="metric-icon mi-plan">○</div>
+              <span class="metric-num mn-plan" id="mn-plan">0</span>
+            </div>
+            <div class="metric-label">Planned</div>
+          </div>
+          <div class="metric-card" onclick="filterByStatus('Published')">
+            <div class="metric-top">
+              <div class="metric-icon mi-pub">✓</div>
+              <span class="metric-num mn-pub" id="mn-pub">0</span>
+            </div>
+            <div class="metric-label">Published</div>
+          </div>
+        </div>
+
+        <!-- Dashboard 2-col grid -->
+        <div class="dash-grid">
+          <!-- In the Works -->
+          <div class="section-card">
+            <div class="sc-head">
+              <span class="sc-title">In the Works</span>
+              <span class="sc-count" id="active-count">0</span>
+            </div>
+            <div class="active-cards" id="active-cards"></div>
+          </div>
+          <!-- Up Next -->
+          <div class="section-card">
+            <div class="sc-head">
+              <span class="sc-title">Up Next</span>
+              <span class="sc-count" id="queue-count">0</span>
+            </div>
+            <div class="up-next-list" id="up-next-list"></div>
+          </div>
+        </div>
+
+        <!-- Published -->
+        <div id="sec-pub">
+          <div class="pub-head">
+            <span class="pub-head-title">Published</span>
+            <span class="pub-head-count" id="pub-count">0 items</span>
+          </div>
+          <div class="pub-grid" id="pub-grid"></div>
+        </div>
+      </div>
+
+      <!-- ── PIPELINE VIEW ── -->
+      <div id="view-pipeline">
+        <div class="pl-filter-bar">
+          <span class="pl-label">Team</span>
+          <button class="pl-chip cactive" data-team="all" onclick="setPlTeamFilter('all')">All</button>
+          <button class="pl-chip cpan" data-team="PAN Blast" onclick="setPlTeamFilter('PAN Blast')">PAN Blast</button>
+          <button class="pl-chip cf97" data-team="97th Floor" onclick="setPlTeamFilter('97th Floor')">97th Floor</button>
+          <button class="pl-chip cint f-int" data-team="Internal" onclick="setPlTeamFilter('Internal')">Internal</button>
+          <span class="pl-sep"></span>
+          <span class="pl-label">Status</span>
+          <button class="pl-chip" data-status="In Production"  onclick="setPlStatusFilter('In Production')">Producing</button>
+          <button class="pl-chip" data-status="In Review"      onclick="setPlStatusFilter('In Review')">In Review</button>
+          <button class="pl-chip" data-status="Upcoming"       onclick="setPlStatusFilter('Upcoming')">Upcoming</button>
+          <button class="pl-chip" data-status="Planned"        onclick="setPlStatusFilter('Planned')">Planned</button>
+          <button class="pl-chip" data-status="Published"      onclick="setPlStatusFilter('Published')">Published</button>
+          <span class="pl-count" id="pl-count">— items</span>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="pl-table">
+            <thead><tr>
+              <th style="width:36px">#</th>
+              <th>Title</th>
+              <th style="width:100px">Team</th>
+              <th style="width:80px">Format</th>
+              <th style="width:110px">Owner</th>
+              <th style="width:90px">Due Date</th>
+              <th style="width:110px">Status</th>
+              <th style="width:120px">Progress</th>
+              <th style="width:80px;text-align:right">Views</th>
+            </tr></thead>
+            <tbody id="pl-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /content-scroll -->
+  </div><!-- /main-wrap -->
+</div><!-- /layout -->
+
+<!-- BOTTOM BAR -->
 <div id="bottombar">
-  <div class="dispatch-lbl">Dispatch</div>
+  <div class="dispatch-label">Live</div>
   <div class="ticker-track"><div class="ticker-inner" id="ticker-inner"></div></div>
   <div class="bb-right">
-    <span class="bb-count" id="bb-count">—</span>
-    <span class="bb-date" id="bb-date">—</span>
+    <span class="bb-stat" id="bb-count">—</span>
+    <span class="bb-stat" id="bb-date">—</span>
   </div>
 </div>
 
 <!-- ═══ SETTINGS MODAL ═══ -->
 <div id="modal-settings" class="modal-overlay">
-  <div class="modal modal-accent" style="width:640px">
+  <div class="modal modal-indigo" style="width:640px">
     <div class="modal-header">
-      <div class="modal-title">⚙ Google Sheets Connection</div>
+      <div class="modal-title">Google Sheets Connection</div>
       <button class="modal-close" onclick="closeModal('modal-settings')">✕</button>
     </div>
     <div class="modal-body">
       <div class="setup-steps">
-        <div class="setup-step"><div class="setup-step-num">1</div><div class="setup-step-text">Go to <strong style="color:var(--t1)">script.google.com</strong> → click <code>New project</code></div></div>
+        <div class="setup-step"><div class="setup-step-num">1</div><div class="setup-step-text">Go to <strong>script.google.com</strong> → click <code>New project</code></div></div>
         <div class="setup-step"><div class="setup-step-num">2</div><div class="setup-step-text">Delete the default code. Paste the contents of <code>content-factory-backend.gs</code> from your Brand Marketing Drive folder.</div></div>
         <div class="setup-step"><div class="setup-step-num">3</div><div class="setup-step-text">Click <code>Deploy</code> → <code>New deployment</code> → gear icon → <code>Web app</code></div></div>
-        <div class="setup-step"><div class="setup-step-num">4</div><div class="setup-step-text">Set <strong style="color:var(--t1)">Execute as: Me</strong> and <strong style="color:var(--t1)">Who has access: Anyone</strong> → Deploy → authorize</div></div>
-        <div class="setup-step"><div class="setup-step-num">5</div><div class="setup-step-text">Copy the <strong style="color:var(--t1)">Web app URL</strong> and paste it below</div></div>
+        <div class="setup-step"><div class="setup-step-num">4</div><div class="setup-step-text">Set <strong>Execute as: Me</strong> and <strong>Who has access: Anyone</strong> → Deploy → authorize when prompted</div></div>
+        <div class="setup-step"><div class="setup-step-num">5</div><div class="setup-step-text">Copy the <strong>Web app URL</strong> and paste it below</div></div>
       </div>
       <div class="form-group">
         <label class="form-label">Web App URL</label>
-        <input type="text" class="form-input" id="settings-gas-url" placeholder="https://script.google.com/macros/s/AKfycb.../exec" style="font-size:11px">
-        <div class="form-hint">The URL ends in <code style="color:var(--t1)">/exec</code></div>
+        <input type="text" class="form-input" id="settings-gas-url" placeholder="https://script.google.com/macros/s/AKfycb.../exec">
+        <div class="form-hint">The URL ends in <code>/exec</code></div>
       </div>
       <div class="form-group">
         <label class="form-label">Auto-sync interval</label>
@@ -701,31 +780,31 @@ body.locked .ac-card, body.locked .q-row, body.locked .pub-card { cursor: defaul
         <button class="btn sm" onclick="testGasConnection()">▶ Test Connection</button>
         <div id="gas-test-result" class="gas-test-result"></div>
       </div>
-      <div style="margin-top:18px;padding:12px 14px;background:rgba(0,0,0,0.2);border:1px solid var(--border);font-family:var(--fm);font-size:10px;color:var(--t3);line-height:1.8">
-        <div style="color:var(--t2);margin-bottom:4px">What gets synced:</div>
+      <div style="margin-top:18px;padding:14px 16px;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:var(--r-sm);font-family:var(--fm);font-size:10px;color:var(--t3);line-height:1.9">
+        <div style="color:var(--t2);margin-bottom:6px;font-family:var(--fd);font-size:11px;">What gets synced</div>
         <div><span style="color:var(--pan)">● PAN Blast</span> — reads &amp; writes to <em>PI Content Calendar → Calendar: blog</em></div>
         <div><span style="color:var(--f97)">● 97th Floor</span> — reads &amp; writes to <em>PI Content Hub → All Content</em></div>
-        <div><span style="color:var(--int)">● Internal</span> — reads &amp; writes to a <em>Content</em> tab (created automatically)</div>
-        <div style="margin-top:6px;color:var(--yellow)">⚠ New rows can only be added to the Internal sheet from this dashboard.</div>
+        <div><span style="color:var(--int)">● Internal</span> — reads &amp; writes to a <em>Content</em> tab (auto-created on first sync)</div>
+        <div style="margin-top:8px;color:var(--amber)">⚠ New rows can only be added to the Internal sheet from this dashboard.</div>
       </div>
     </div>
     <div class="modal-footer">
       <button class="btn" onclick="disconnectSheets()" style="margin-right:auto;color:var(--t3)">Disconnect</button>
       <button class="btn" onclick="closeModal('modal-settings')">Cancel</button>
-      <button class="btn primary" onclick="saveSettings()">✓ Save &amp; Sync</button>
+      <button class="btn primary" onclick="saveSettings()">Save &amp; Sync</button>
     </div>
   </div>
 </div>
 
 <!-- ═══ IMPORT MODAL ═══ -->
 <div id="modal-import" class="modal-overlay">
-  <div class="modal modal-accent">
+  <div class="modal modal-indigo">
     <div class="modal-header">
-      <div class="modal-title">⊕ Import from Spreadsheet</div>
+      <div class="modal-title">Import from Spreadsheet</div>
       <button class="modal-close" onclick="closeModal('modal-import')">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-family:var(--fm);font-size:11px;color:var(--t3);margin-bottom:16px;line-height:1.7">Paste CSV from your spreadsheet. <strong style="color:var(--accent)">Required:</strong> Asset Title + Team + Status</p>
+      <p style="font-family:var(--fm);font-size:11px;color:var(--t2);margin-bottom:16px;line-height:1.7">Paste CSV from your spreadsheet. <strong style="color:var(--indigo)">Required:</strong> Asset Title + Team + Status</p>
       <div class="columns-legend">
         <div class="col-chip req">Asset Title</div><div class="col-chip req">Team</div><div class="col-chip req">Status</div>
         <div class="col-chip">Owner</div><div class="col-chip">Target publication date</div><div class="col-chip">Format</div>
@@ -734,17 +813,8 @@ body.locked .ac-card, body.locked .q-row, body.locked .pub-card { cursor: defaul
         <div class="col-chip">Google Drive link</div><div class="col-chip">Live link</div><div class="col-chip">Pageviews</div>
       </div>
       <div class="form-group">
-        <label class="form-label">Team values accepted</label>
-        <div class="form-hint" style="margin-top:0">
-          <span style="color:var(--pan)">PAN Blast</span> &nbsp;·&nbsp;
-          <span style="color:var(--f97)">97th Floor</span> &nbsp;·&nbsp;
-          <span style="color:var(--int)">Internal</span>
-          &nbsp;&nbsp;|&nbsp;&nbsp; Status: Published · In Production · In Review · Upcoming · Planned
-        </div>
-      </div>
-      <div class="form-group">
         <label class="form-label">Paste CSV Data</label>
-        <textarea class="form-textarea" id="csv-input" style="min-height:160px" placeholder="Asset Title,Team,Status,Owner,Target publication date,Format,..."></textarea>
+        <textarea class="form-textarea" id="csv-input" style="min-height:160px" placeholder="Asset Title,Team,Status,Owner,..."></textarea>
       </div>
       <div class="form-group">
         <label class="form-label">Import Mode</label>
@@ -757,7 +827,7 @@ body.locked .ac-card, body.locked .q-row, body.locked .pub-card { cursor: defaul
     </div>
     <div class="modal-footer">
       <button class="btn" onclick="closeModal('modal-import')">Cancel</button>
-      <button class="btn primary" onclick="importData()">⊕ Import</button>
+      <button class="btn primary" onclick="importData()">Import</button>
     </div>
   </div>
 </div>
@@ -766,12 +836,12 @@ body.locked .ac-card, body.locked .q-row, body.locked .pub-card { cursor: defaul
 <div id="modal-edit" class="modal-overlay">
   <div class="modal modal-blue" style="width:760px">
     <div class="modal-header">
-      <div class="modal-title" id="edit-modal-title">+ Add Asset</div>
+      <div class="modal-title" id="edit-modal-title">Add Asset</div>
       <button class="modal-close" onclick="closeModal('modal-edit')">✕</button>
     </div>
     <div class="modal-body">
       <input type="hidden" id="edit-id">
-      <div class="form-group form-full">
+      <div class="form-group">
         <label class="form-label">Asset Title *</label>
         <input type="text" class="form-input" id="edit-title" placeholder="Full asset title">
       </div>
@@ -835,7 +905,7 @@ body.locked .ac-card, body.locked .q-row, body.locked .pub-card { cursor: defaul
       </div>
       <div class="form-group">
         <label class="form-label">Description</label>
-        <textarea class="form-textarea" id="edit-desc" style="min-height:56px" placeholder="Brief description of the asset"></textarea>
+        <textarea class="form-textarea" id="edit-desc" style="min-height:56px" placeholder="Brief description"></textarea>
       </div>
       <div class="form-group">
         <label class="form-label">Notes and Next Steps</label>
@@ -856,14 +926,14 @@ body.locked .ac-card, body.locked .q-row, body.locked .pub-card { cursor: defaul
         </div>
       </div>
       <div class="form-group">
-        <label class="form-label">Pageviews <span style="color:var(--t4)">(manual until GA connected)</span></label>
+        <label class="form-label">Pageviews</label>
         <input type="number" class="form-input" id="edit-pageviews" placeholder="e.g. 4200" min="0">
       </div>
     </div>
     <div class="modal-footer admin-only">
-      <button class="btn" id="edit-delete-btn" onclick="deleteCurrentItem()" style="margin-right:auto;color:var(--accent);border-color:rgba(255,61,32,0.3)">⊗ Delete</button>
+      <button class="btn" id="edit-delete-btn" onclick="deleteCurrentItem()" style="margin-right:auto;color:var(--red);border-color:rgba(255,87,87,0.3)">Delete</button>
       <button class="btn" onclick="closeModal('modal-edit')">Cancel</button>
-      <button class="btn primary" onclick="saveEditItem()">✓ Save</button>
+      <button class="btn primary" onclick="saveEditItem()">Save Changes</button>
     </div>
     <div class="modal-footer" id="edit-ro-footer" style="display:none">
       <button class="btn" onclick="closeModal('modal-edit')">Close</button>
@@ -873,23 +943,20 @@ body.locked .ac-card, body.locked .q-row, body.locked .pub-card { cursor: defaul
 
 <!-- ═══ LOCK MODAL ═══ -->
 <div id="modal-lock" class="modal-overlay">
-  <div class="modal modal-accent" style="width:360px">
+  <div class="modal modal-indigo" style="width:360px">
     <div class="modal-header">
-      <div class="modal-title">🔒 Internal Access</div>
+      <div class="modal-title">Internal Access</div>
       <button class="modal-close" onclick="closeModal('modal-lock')">✕</button>
     </div>
-    <div class="modal-body" style="text-align:center;padding:28px 24px">
-      <div style="font-family:var(--fm);font-size:10px;color:var(--t3);margin-bottom:20px;line-height:1.8">
-        Enter the access code to unlock internal<br>team data and editing controls.
-      </div>
-      <div class="form-group" style="margin-bottom:8px">
-        <input type="password" class="form-input" id="lock-pw" placeholder="ACCESS CODE"
-          style="text-align:center;letter-spacing:6px;font-size:16px"
-          onkeydown="if(event.key==='Enter')submitLock()">
-      </div>
-      <div id="lock-error" style="display:none;font-family:var(--fm);font-size:10px;color:var(--accent);margin-top:10px">⚠ Incorrect access code</div>
+    <div class="modal-body" style="text-align:center;padding:32px 28px">
+      <div style="width:52px;height:52px;background:var(--indigo-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 18px">🔒</div>
+      <div style="font-family:var(--fb);font-size:13px;color:var(--t2);margin-bottom:20px;line-height:1.7">Enter the access code to unlock internal<br>team data and editing controls.</div>
+      <input type="password" class="form-input" id="lock-pw" placeholder="Access code"
+        style="text-align:center;letter-spacing:8px;font-size:18px;margin-bottom:8px"
+        onkeydown="if(event.key==='Enter')submitLock()">
+      <div id="lock-error" style="display:none;font-family:var(--fm);font-size:11px;color:var(--red);margin-top:8px">Incorrect access code</div>
     </div>
-    <div class="modal-footer" style="justify-content:center;gap:12px">
+    <div class="modal-footer" style="justify-content:center;gap:10px">
       <button class="btn" onclick="closeModal('modal-lock')">Cancel</button>
       <button class="btn primary" onclick="submitLock()">Unlock</button>
     </div>
@@ -907,26 +974,26 @@ function getDefaultData() {
     { id:1,  title:"The Future of Talent Acquisition: Trends Defining 2026", team:"PAN Blast",  format:"Blog",   status:"Published",     owner:"Sarah K.",    target_pub_date:"2026-04-28", pillar:"Talent Acquisition",  audience:"HR Leaders, TA Teams", description:"A data-driven look at how companies are evolving hiring strategies using behavioral science and AI.", keywords:"talent acquisition, hiring trends, 2026", live_link:"#", drive_link:"", pageviews:6842 },
     { id:2,  title:"How to Build High-Performing Teams with Behavioral Data", team:"97th Floor", format:"Blog",   status:"Published",     owner:"John D.",     target_pub_date:"2026-04-21", pillar:"Team Effectiveness",  audience:"Managers, People Ops", description:"Exploring how PI's behavioral assessments help managers create cohesive, results-driven teams.", keywords:"high performing teams, behavioral data, PI", live_link:"#", drive_link:"", pageviews:5210 },
     { id:3,  title:"PI Behavioral Assessment: A Complete Guide for HR Leaders", team:"Internal", format:"Blog",   status:"Published",     owner:"Marcus T.",   target_pub_date:"2026-04-14", pillar:"PI Platform",         audience:"HR Leaders",           description:"Everything an HR professional needs to know about implementing PI across the employee lifecycle.", keywords:"behavioral assessment, PI, HR guide", live_link:"#", drive_link:"", pageviews:9130 },
-    { id:4,  title:"Remote Work & Talent Management: Lessons from 500 Companies", team:"PAN Blast", format:"Blog", status:"Published",   owner:"Sarah K.",    target_pub_date:"2026-04-07", pillar:"Workforce Trends",    audience:"CHROs, CEOs",          description:"New research reveals how distributed teams use talent intelligence to maintain performance.", keywords:"remote work, talent management, distributed teams", live_link:"#", drive_link:"", pageviews:4380 },
-    { id:5,  title:"Leadership Development in the Modern Workplace",          team:"97th Floor", format:"Blog",   status:"Published",     owner:"Amanda R.",   target_pub_date:"2026-03-31", pillar:"Leadership",          audience:"L&D, Senior Leaders",  description:"How forward-thinking organizations use behavioral data to accelerate leadership readiness.", keywords:"leadership development, behavioral data, workplace", live_link:"#", drive_link:"", pageviews:3960 },
-    { id:6,  title:"Using People Data to Drive Smarter Hiring Decisions",     team:"Internal",   format:"Blog",   status:"Published",     owner:"Chris L.",    target_pub_date:"2026-03-24", pillar:"Talent Acquisition",  audience:"Recruiters, HR Ops",   description:"A practical guide to moving from gut-feel hiring to evidence-based talent selection.", keywords:"people data, hiring decisions, evidence-based hiring", live_link:"#", drive_link:"", pageviews:7215 },
-    { id:7,  title:"Q2 State of the Workforce Report",                        team:"PAN Blast",  format:"Report", status:"In Production", owner:"Sarah K.",    target_pub_date:"2026-05-12", pillar:"Workforce Trends",    audience:"C-Suite, CHROs",       description:"Quarterly benchmark report on workforce performance, engagement, and talent trends.", notes:"Draft outline complete. Need SME review from PI science team. Sarah to schedule.", progress:65 },
-    { id:8,  title:"The PI Cognitive Assessment: What It Measures & Why",     team:"97th Floor", format:"Blog",   status:"In Production", owner:"John D.",     target_pub_date:"2026-05-08", pillar:"PI Platform",         audience:"HR Leaders, Buyers",   description:"Deep dive into the science and practical application of the PI cognitive assessment.", notes:"85% complete — needs final proof and SEO review before handoff.", progress:85 },
-    { id:9,  title:"Building a Talent Strategy from Scratch",                 team:"Internal",   format:"Blog",   status:"In Production", owner:"Marcus T.",   target_pub_date:"2026-05-20", pillar:"Talent Optimization", audience:"Startup Founders, HRBPs", description:"Step-by-step guide for early-stage companies building their first people strategy.", notes:"Outline approved. First draft in progress. Waiting on customer quote from CS team.", progress:40 },
-    { id:10, title:"Diversity, Equity & Inclusion: A Behavioral Science Framework", team:"PAN Blast", format:"eBook", status:"In Production", owner:"Sarah K.", target_pub_date:"2026-05-28", pillar:"DEI",              audience:"HR Leaders, DEI Practitioners", description:"How organizations use behavioral science to build more equitable hiring and development processes.", notes:"Research phase complete. Outline needs approval. Designer not yet assigned.", progress:25 },
-    { id:11, title:"The Manager Effectiveness Toolkit",                        team:"97th Floor", format:"eBook",  status:"In Production", owner:"Amanda R.",   target_pub_date:"2026-05-10", pillar:"Leadership",          audience:"Managers, L&D Teams",  description:"A practical resource bundle for managers looking to improve team performance and engagement.", notes:"Design in progress. Copy at 70% — waiting on final section from writer.", progress:70 },
-    { id:12, title:"PI Software Spring Features Overview",                     team:"Internal",   format:"Blog",   status:"In Review",     owner:"Chris L.",    target_pub_date:"2026-05-15", pillar:"PI Platform",         audience:"Existing Customers",   description:"Recap of Q2 product updates including new analytics dashboard and integration improvements.", notes:"Ready for final review. Chris to get sign-off from Product team by EOW.", progress:90 },
-    { id:13, title:"The Science Behind Behavioral Data: A Deep Dive",          team:"PAN Blast",  format:"Blog",   status:"Upcoming",      owner:"Sarah K.",    target_pub_date:"2026-06-05", pillar:"PI Platform",         audience:"CHRO, Skeptical Buyers", keywords:"behavioral data science, predictive index research" },
+    { id:4,  title:"Remote Work & Talent Management: Lessons from 500 Companies", team:"PAN Blast", format:"Blog", status:"Published",   owner:"Sarah K.",    target_pub_date:"2026-04-07", pillar:"Workforce Trends",    audience:"CHROs, CEOs",          description:"New research reveals how distributed teams use talent intelligence to maintain performance.", keywords:"remote work, talent management", live_link:"#", drive_link:"", pageviews:4380 },
+    { id:5,  title:"Leadership Development in the Modern Workplace",          team:"97th Floor", format:"Blog",   status:"Published",     owner:"Amanda R.",   target_pub_date:"2026-03-31", pillar:"Leadership",          audience:"L&D, Senior Leaders",  description:"How forward-thinking organizations use behavioral data to accelerate leadership readiness.", live_link:"#", drive_link:"", pageviews:3960 },
+    { id:6,  title:"Using People Data to Drive Smarter Hiring Decisions",     team:"Internal",   format:"Blog",   status:"Published",     owner:"Chris L.",    target_pub_date:"2026-03-24", pillar:"Talent Acquisition",  audience:"Recruiters, HR Ops",   description:"A practical guide to moving from gut-feel hiring to evidence-based talent selection.", live_link:"#", drive_link:"", pageviews:7215 },
+    { id:7,  title:"Q2 State of the Workforce Report",                        team:"PAN Blast",  format:"Report", status:"In Production", owner:"Sarah K.",    target_pub_date:"2026-05-12", pillar:"Workforce Trends",    audience:"C-Suite, CHROs",       description:"Quarterly benchmark report on workforce performance.", notes:"Draft outline complete. Need SME review from PI science team.", progress:65 },
+    { id:8,  title:"The PI Cognitive Assessment: What It Measures & Why",     team:"97th Floor", format:"Blog",   status:"In Production", owner:"John D.",     target_pub_date:"2026-05-08", pillar:"PI Platform",         audience:"HR Leaders, Buyers",   notes:"85% complete — needs final proof and SEO review before handoff.", progress:85 },
+    { id:9,  title:"Building a Talent Strategy from Scratch",                 team:"Internal",   format:"Blog",   status:"In Production", owner:"Marcus T.",   target_pub_date:"2026-05-20", pillar:"Talent Optimization", notes:"Outline approved. First draft in progress. Waiting on customer quote from CS team.", progress:40 },
+    { id:10, title:"Diversity, Equity & Inclusion: A Behavioral Science Framework", team:"PAN Blast", format:"eBook", status:"In Production", owner:"Sarah K.", target_pub_date:"2026-05-28", pillar:"DEI", notes:"Research phase complete. Outline needs approval. Designer not yet assigned.", progress:25 },
+    { id:11, title:"The Manager Effectiveness Toolkit",                        team:"97th Floor", format:"eBook",  status:"In Production", owner:"Amanda R.",   target_pub_date:"2026-05-10", pillar:"Leadership",          notes:"Design in progress. Copy at 70% — waiting on final section from writer.", progress:70 },
+    { id:12, title:"PI Software Spring Features Overview",                     team:"Internal",   format:"Blog",   status:"In Review",     owner:"Chris L.",    target_pub_date:"2026-05-15", pillar:"PI Platform",         notes:"Ready for final review. Chris to get sign-off from Product team by EOW.", progress:90 },
+    { id:13, title:"The Science Behind Behavioral Data: A Deep Dive",          team:"PAN Blast",  format:"Blog",   status:"Upcoming",      owner:"Sarah K.",    target_pub_date:"2026-06-05", pillar:"PI Platform",         audience:"CHRO, Skeptical Buyers" },
     { id:14, title:"Employee Experience Report 2026",                          team:"97th Floor", format:"Report", status:"Upcoming",      owner:"John D.",     target_pub_date:"2026-06-12", pillar:"Workforce Trends",    audience:"HR Leaders, People Ops" },
-    { id:15, title:"Onboarding Best Practices: The Behavioral Approach",       team:"Internal",   format:"Blog",   status:"Upcoming",      owner:"Marcus T.",   target_pub_date:"2026-06-08", pillar:"Talent Optimization", audience:"HR Ops, HRBPs",        keywords:"onboarding best practices, employee onboarding" },
-    { id:16, title:"Sales Team Optimization with Predictive Index",            team:"PAN Blast",  format:"Blog",   status:"Upcoming",      owner:"",            target_pub_date:"2026-06-20", pillar:"Sales Performance",   audience:"Sales Leaders, RevOps" },
-    { id:17, title:"The ROI of Talent Intelligence: Making the Business Case", team:"97th Floor", format:"Blog",   status:"Upcoming",      owner:"Amanda R.",   target_pub_date:"2026-06-28", pillar:"Talent Optimization", audience:"CFOs, CEOs",           keywords:"talent intelligence ROI, business case, PI" },
-    { id:18, title:"PI + HR Tech Integrations Guide",                          team:"Internal",   format:"eBook",  status:"Upcoming",      owner:"Chris L.",    target_pub_date:"2026-06-30", pillar:"PI Platform",         audience:"IT, HR Ops" },
-    { id:19, title:"Workforce Planning for 2027: A Strategic Roadmap",         team:"PAN Blast",  format:"Report", status:"Planned",       owner:"",            target_pub_date:"2026-07-10", pillar:"Workforce Trends",    audience:"C-Suite, CHROs" },
-    { id:20, title:"Case Study: Fortune 500 Talent Transformation with PI",    team:"Internal",   format:"Blog",   status:"Planned",       owner:"",            target_pub_date:"2026-07-15", pillar:"Social Proof",        audience:"Enterprise Buyers" },
-    { id:21, title:"Cognitive Ability & Job Performance: The Research",        team:"97th Floor", format:"Blog",   status:"Planned",       owner:"Amanda R.",   target_pub_date:"2026-07-22", pillar:"PI Platform",         audience:"HR Leaders, Skeptics" },
-    { id:22, title:"PI for Startups: Scale Your Culture from Day One",         team:"PAN Blast",  format:"Blog",   status:"Planned",       owner:"",            target_pub_date:"2026-08-01", pillar:"Talent Acquisition",  audience:"Founders, People Ops" },
-    { id:23, title:"Customer Retention Through Talent Alignment",              team:"97th Floor", format:"Blog",   status:"Planned",       owner:"Amanda R.",   target_pub_date:"2026-08-10", pillar:"Business Impact",     audience:"CEOs, CS Leaders" },
+    { id:15, title:"Onboarding Best Practices: The Behavioral Approach",       team:"Internal",   format:"Blog",   status:"Upcoming",      owner:"Marcus T.",   target_pub_date:"2026-06-08", pillar:"Talent Optimization" },
+    { id:16, title:"Sales Team Optimization with Predictive Index",            team:"PAN Blast",  format:"Blog",   status:"Upcoming",      owner:"",            target_pub_date:"2026-06-20", pillar:"Sales Performance" },
+    { id:17, title:"The ROI of Talent Intelligence: Making the Business Case", team:"97th Floor", format:"Blog",   status:"Upcoming",      owner:"Amanda R.",   target_pub_date:"2026-06-28", pillar:"Talent Optimization" },
+    { id:18, title:"PI + HR Tech Integrations Guide",                          team:"Internal",   format:"eBook",  status:"Upcoming",      owner:"Chris L.",    target_pub_date:"2026-06-30", pillar:"PI Platform" },
+    { id:19, title:"Workforce Planning for 2027: A Strategic Roadmap",         team:"PAN Blast",  format:"Report", status:"Planned",       owner:"",            target_pub_date:"2026-07-10", pillar:"Workforce Trends" },
+    { id:20, title:"Case Study: Fortune 500 Talent Transformation with PI",    team:"Internal",   format:"Blog",   status:"Planned",       owner:"",            target_pub_date:"2026-07-15", pillar:"Social Proof" },
+    { id:21, title:"Cognitive Ability & Job Performance: The Research",        team:"97th Floor", format:"Blog",   status:"Planned",       owner:"Amanda R.",   target_pub_date:"2026-07-22", pillar:"PI Platform" },
+    { id:22, title:"PI for Startups: Scale Your Culture from Day One",         team:"PAN Blast",  format:"Blog",   status:"Planned",       owner:"",            target_pub_date:"2026-08-01", pillar:"Talent Acquisition" },
+    { id:23, title:"Customer Retention Through Talent Alignment",              team:"97th Floor", format:"Blog",   status:"Planned",       owner:"Amanda R.",   target_pub_date:"2026-08-10", pillar:"Business Impact" },
   ];
 }
 
@@ -944,41 +1011,24 @@ function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
 // ═══════════════════════════════════════════════════════
 //  HELPERS
 // ═══════════════════════════════════════════════════════
-const TEAMS = {
-  'PAN Blast':  { cls:'tc-pan', tb:'tb-pan', icon:'⚡', color:'var(--pan)' },
-  '97th Floor': { cls:'tc-f97', tb:'tb-f97', icon:'⬡', color:'var(--f97)' },
-  'Internal':   { cls:'tc-int', tb:'tb-int', icon:'◈', color:'var(--int)' }
-};
-function teamMeta(team) { return TEAMS[team] || TEAMS['Internal']; }
-
-function tc(team) {
-  if (team === 'PAN Blast') return 'tc-pan';
-  if (team === '97th Floor') return 'tc-f97';
-  return 'tc-int';
+function teamCls(team) {
+  if (team === 'PAN Blast') return 'pan';
+  if (team === '97th Floor') return 'f97';
+  return 'int';
 }
-
+function teamColor(team) {
+  if (team === 'PAN Blast') return 'var(--pan)';
+  if (team === '97th Floor') return 'var(--f97)';
+  return 'var(--int)';
+}
 function tBadge(team) {
-  const map = { 'PAN Blast':'tb-pan', '97th Floor':'tb-f97', 'Internal':'tb-int' };
-  return `<span class="tb ${map[team]||'tb-int'}">${team}</span>`;
+  return `<span class="tb tb-${teamCls(team)}">${team}</span>`;
 }
-
 function sBadge(status) {
-  const map = {
-    'In Production': ['sb-prod',     '● Producing'],
-    'In Review':     ['sb-review',   '◈ In Review'],
-    'Upcoming':      ['sb-upcoming', '◆ Upcoming'],
-    'Planned':       ['sb-planned',  '○ Planned'],
-    'Published':     ['sb-pub',      '✓ Published'],
-  };
-  const [cls, lbl] = map[status] || ['sb-planned', status];
-  return `<span class="sb ${cls}">${lbl}</span>`;
+  const map = { 'In Production':['sb-prod','● Producing'], 'In Review':['sb-review','◈ Review'], 'Upcoming':['sb-up','◆ Upcoming'], 'Planned':['sb-plan','○ Planned'], 'Published':['sb-pub','✓ Published'] };
+  const [cls, lbl] = map[status] || ['sb-plan', status];
+  return `<span class="sb-badge ${cls}">${lbl}</span>`;
 }
-
-function fBadge(f) {
-  if (!f) return '';
-  return `<span class="fb-tag">${f}</span>`;
-}
-
 function fmtDate(d) {
   if (!d) return '—';
   try { return new Date(d + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'}); } catch(e) { return d; }
@@ -987,112 +1037,129 @@ function fmtDateLong(d) {
   if (!d) return '—';
   try { return new Date(d + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); } catch(e) { return d; }
 }
-function dueCls(dateStr) {
-  if (!dateStr) return '';
-  try {
-    const diff = (new Date(dateStr + 'T12:00:00') - new Date()) / 86400000;
-    if (diff < 0) return 'overdue'; if (diff <= 7) return 'soon';
-  } catch(e) {}
+function dueCls(ds) {
+  if (!ds) return '';
+  try { const diff = (new Date(ds+'T12:00:00') - new Date()) / 86400000; if (diff < 0) return 'overdue'; if (diff <= 7) return 'soon'; } catch(e) {}
   return '';
 }
 function itemDate(item) { return item.target_pub_date || item.publish_date || item.due_date || ''; }
+function pvFmt(pv) { return pv != null && pv !== '' ? Number(pv).toLocaleString() : null; }
 
 // ═══════════════════════════════════════════════════════
-//  FILTERS
+//  VIEW & FILTER STATE
 // ═══════════════════════════════════════════════════════
-let teamFilter   = 'all';
-let statusFilter = 'all';
+let currentView = 'dashboard';
+let viewTeamFilter = 'all'; // applied across all views from sidebar
+let plTeamFilter = 'all';   // pipeline-specific
+let plStatusFilter = 'all'; // pipeline-specific
 
-function applyFilters(items) {
-  let filtered = isAuthenticated() ? items : items.filter(d => d.team !== 'Internal');
-  if (teamFilter !== 'all')   filtered = filtered.filter(d => d.team === teamFilter);
-  if (statusFilter !== 'all') filtered = filtered.filter(d => d.status === statusFilter);
-  return filtered;
+function getVisibleData() {
+  let d = isAuthenticated() ? data : data.filter(x => x.team !== 'Internal');
+  if (viewTeamFilter !== 'all') d = d.filter(x => x.team === viewTeamFilter);
+  return d;
 }
 
-function setTeamFilter(val) {
-  teamFilter = val;
-  document.querySelectorAll('.chip[data-team]').forEach(c => {
-    const base = c.classList.contains('cpan') ? 'cpan' : c.classList.contains('cf97') ? 'cf97' : c.classList.contains('cint') ? 'cint' : '';
-    c.className = c.className.replace(' cactive','');
-    if (c.dataset.team === val) c.className += ' cactive';
-  });
-  renderAll();
-}
-
-function setStatusFilter(val) {
-  statusFilter = statusFilter === val ? 'all' : val;
-  document.querySelectorAll('.chip[data-status]').forEach(c => {
-    c.classList.toggle('cactive', c.dataset.status === statusFilter);
-  });
-  // Sync header pills active state
-  document.querySelectorAll('.hdr-pill').forEach(p => p.classList.remove('pactive'));
-  if (statusFilter !== 'all') {
-    const pillMap = { 'In Production':'pill-prod','In Review':'pill-rev','Upcoming':'pill-up','Planned':'pill-plan','Published':'pill-pub' };
-    const pid = pillMap[statusFilter];
-    if (pid) document.getElementById(pid)?.classList.add('pactive');
+function setView(view) {
+  if (view === 'int' && !isAuthenticated()) {
+    document.getElementById('lock-pw').value = '';
+    document.getElementById('lock-error').style.display = 'none';
+    openModal('modal-lock');
+    return;
   }
+  currentView = view;
+  // sidebar active state
+  document.querySelectorAll('.nav-item[data-view]').forEach(el => {
+    el.classList.toggle('nav-active', el.dataset.view === view);
+  });
+  // page title
+  const titles = { dashboard:'Dashboard', pipeline:'All Content', pan:'PAN Blast', '97f':'97th Floor', int:'Internal' };
+  document.getElementById('page-title').textContent = titles[view] || 'Dashboard';
+  // team filter from view
+  const tmap = { pan:'PAN Blast', '97f':'97th Floor', int:'Internal' };
+  viewTeamFilter = tmap[view] || 'all';
+  // show/hide views
+  document.getElementById('view-dashboard').style.display = (view !== 'pipeline') ? '' : 'none';
+  document.getElementById('view-pipeline').style.display  = (view === 'pipeline') ? '' : 'none';
   renderAll();
 }
 
+function filterByStatus(status) {
+  // Click on metric card → switch to pipeline filtered by that status
+  setView('pipeline');
+  plTeamFilter = 'all';
+  plStatusFilter = status;
+  document.querySelectorAll('.pl-chip[data-team]').forEach(c => c.classList.toggle('cactive', c.dataset.team === 'all'));
+  document.querySelectorAll('.pl-chip[data-status]').forEach(c => c.classList.toggle('cactive', c.dataset.status === status));
+  renderPipeline();
+}
+
+function setPlTeamFilter(val) {
+  plTeamFilter = val;
+  document.querySelectorAll('.pl-chip[data-team]').forEach(c => c.classList.toggle('cactive', c.dataset.team === val));
+  renderPipeline();
+}
+function setPlStatusFilter(val) {
+  plStatusFilter = plStatusFilter === val ? 'all' : val;
+  document.querySelectorAll('.pl-chip[data-status]').forEach(c => c.classList.toggle('cactive', c.dataset.status === plStatusFilter));
+  renderPipeline();
+}
+
 // ═══════════════════════════════════════════════════════
-//  RENDER: METRICS (header pills)
+//  RENDER: METRICS + NAV BADGES
 // ═══════════════════════════════════════════════════════
 function renderMetrics() {
   const vis = isAuthenticated() ? data : data.filter(d => d.team !== 'Internal');
-  document.getElementById('pn-prod').textContent  = vis.filter(d => d.status === 'In Production').length;
-  document.getElementById('pn-rev').textContent   = vis.filter(d => d.status === 'In Review').length;
-  document.getElementById('pn-up').textContent    = vis.filter(d => d.status === 'Upcoming').length;
-  document.getElementById('pn-plan').textContent  = vis.filter(d => d.status === 'Planned').length;
-  document.getElementById('pn-pub').textContent   = vis.filter(d => d.status === 'Published').length;
+  document.getElementById('mn-prod').textContent   = vis.filter(d => d.status === 'In Production').length;
+  document.getElementById('mn-review').textContent = vis.filter(d => d.status === 'In Review').length;
+  document.getElementById('mn-up').textContent     = vis.filter(d => d.status === 'Upcoming').length;
+  document.getElementById('mn-plan').textContent   = vis.filter(d => d.status === 'Planned').length;
+  document.getElementById('mn-pub').textContent    = vis.filter(d => d.status === 'Published').length;
+
+  // Nav badges
+  const panCount = data.filter(d => d.team === 'PAN Blast').length;
+  const f97Count = data.filter(d => d.team === '97th Floor').length;
+  const intCount = data.filter(d => d.team === 'Internal').length;
+  document.getElementById('nb-all').textContent = vis.length;
+  document.getElementById('nb-pan').textContent = panCount;
+  document.getElementById('nb-97f').textContent = f97Count;
+  document.getElementById('nb-int').textContent = intCount;
 }
 
 // ═══════════════════════════════════════════════════════
-//  RENDER: IN THE WORKS (cards)
+//  RENDER: ACTIVE CARDS (In the Works)
 // ═══════════════════════════════════════════════════════
 function renderActive() {
-  const items = applyFilters(data)
+  const items = getVisibleData()
     .filter(d => d.status === 'In Production' || d.status === 'In Review')
     .sort((a,b) => (itemDate(a)||'9999').localeCompare(itemDate(b)||'9999'));
 
-  document.getElementById('active-count').textContent = `${items.length} item${items.length!==1?'s':''}`;
+  document.getElementById('active-count').textContent = items.length;
+  const el = document.getElementById('active-cards');
 
-  const sec = document.getElementById('sec-active');
-  const grid = document.getElementById('active-grid');
+  if (!items.length) { el.innerHTML = `<div class="empty-st">No active production.</div>`; return; }
 
-  // Hide section if status filter shows only other statuses
-  if (statusFilter !== 'all' && statusFilter !== 'In Production' && statusFilter !== 'In Review') {
-    sec.classList.add('hidden'); return;
-  }
-  sec.classList.remove('hidden');
-
-  if (!items.length) {
-    grid.innerHTML = `<div class="empty-st">Nothing in production right now.</div>`;
-    return;
-  }
-
-  grid.innerHTML = items.map(item => {
-    const tcls = tc(item.team);
+  el.innerHTML = items.map(item => {
+    const tc = teamCls(item.team);
+    const color = teamColor(item.team);
     const d = itemDate(item);
-    const isRev = item.status === 'In Review';
     const p = Math.min(100, Math.max(0, item.progress || 0));
-    const clickHandler = isAuthenticated() ? `onclick="openEditItem(${item.id})"` : '';
-    return `<div class="ac-card ${tcls}${isRev ? ' in-review' : ''}" ${clickHandler}>
-      <div class="ac-top">
+    const clickAttr = isAuthenticated() ? `onclick="openEditItem(${item.id})"` : '';
+    return `<div class="ac-card" ${clickAttr}>
+      <div class="ac-stripe" style="background:${color}"></div>
+      <div class="ac-body">
         <div class="ac-title">${item.title}</div>
-        ${sBadge(item.status)}
-      </div>
-      <div class="ac-mid">
-        ${tBadge(item.team)}
-        ${fBadge(item.format)}
-        ${item.pillar ? `<span style="font-family:var(--fm);font-size:8px;color:var(--t4)">${item.pillar}</span>` : ''}
-      </div>
-      <div class="ac-bottom">
-        <div class="ac-prog">
-          <div class="prog-bar"><div class="prog-fill ${tcls}" style="width:${p}%"></div></div>
-          <span class="prog-pct">${p}%</span>
+        <div class="ac-meta">
+          ${tBadge(item.team)}
+          ${item.format ? `<span class="fb-tag">${item.format}</span>` : ''}
+          ${sBadge(item.status)}
+          ${item.owner ? `<span style="font-family:var(--fm);font-size:9px;color:var(--t3)">${item.owner}</span>` : ''}
         </div>
-        ${item.owner ? `<span class="ac-owner">${item.owner}</span>` : ''}
+        <div class="ac-prog-row">
+          <div class="ac-prog-bar"><div class="ac-prog-fill fill-${tc}" style="width:${p}%"></div></div>
+          <span class="ac-prog-pct">${p}%</span>
+        </div>
+      </div>
+      <div class="ac-right">
         ${d ? `<span class="ac-date ${dueCls(d)}">${fmtDate(d)}</span>` : ''}
       </div>
     </div>`;
@@ -1100,107 +1167,128 @@ function renderActive() {
 }
 
 // ═══════════════════════════════════════════════════════
-//  RENDER: UP NEXT (list rows)
+//  RENDER: UP NEXT
 // ═══════════════════════════════════════════════════════
-function renderQueue() {
-  const items = applyFilters(data)
+function renderUpNext() {
+  const items = getVisibleData()
     .filter(d => d.status === 'Upcoming' || d.status === 'Planned')
     .sort((a,b) => {
       if (a.status !== b.status) return a.status === 'Upcoming' ? -1 : 1;
       return (itemDate(a)||'9999').localeCompare(itemDate(b)||'9999');
     });
 
-  document.getElementById('queue-count').textContent = `${items.length} item${items.length!==1?'s':''}`;
+  document.getElementById('queue-count').textContent = items.length;
+  const el = document.getElementById('up-next-list');
 
-  const sec  = document.getElementById('sec-queue');
-  const list = document.getElementById('queue-list');
+  if (!items.length) { el.innerHTML = `<div class="empty-st">Queue empty.</div>`; return; }
 
-  if (statusFilter !== 'all' && statusFilter !== 'Upcoming' && statusFilter !== 'Planned') {
-    sec.classList.add('hidden'); return;
-  }
-  sec.classList.remove('hidden');
-
-  if (!items.length) {
-    list.innerHTML = `<div class="empty-st">Queue is empty.</div>`;
-    return;
-  }
-
-  list.innerHTML = items.map(item => {
-    const tcls = tc(item.team);
+  el.innerHTML = items.map(item => {
     const d = itemDate(item);
-    const clickHandler = isAuthenticated() ? `onclick="openEditItem(${item.id})"` : '';
-    return `<div class="q-row" ${clickHandler}>
-      <div class="q-accent ${tcls}"></div>
-      <div class="q-title">${item.title}</div>
-      <div class="q-team">${tBadge(item.team)}</div>
-      <div class="q-date ${dueCls(d)}">${fmtDate(d)}</div>
-      <div class="q-status">${sBadge(item.status)}</div>
-      <div class="q-owner">${item.owner||'—'}</div>
+    const clickAttr = isAuthenticated() ? `onclick="openEditItem(${item.id})"` : '';
+    return `<div class="un-row" ${clickAttr}>
+      <span class="un-dot" style="background:${teamColor(item.team)}"></span>
+      <span class="un-title" title="${item.title}">${item.title}</span>
+      ${sBadge(item.status)}
+      <span class="un-date ${dueCls(d)}">${fmtDate(d)}</span>
     </div>`;
   }).join('');
 }
 
 // ═══════════════════════════════════════════════════════
-//  RENDER: PUBLISHED (editorial cards)
+//  RENDER: PUBLISHED
 // ═══════════════════════════════════════════════════════
 function renderPublished() {
-  const items = applyFilters(data)
+  const items = getVisibleData()
     .filter(d => d.status === 'Published')
     .sort((a,b) => (itemDate(b)||'').localeCompare(itemDate(a)||''));
 
-  document.getElementById('pub-count').textContent = `${items.length} item${items.length!==1?'s':''}`;
+  document.getElementById('pub-count').textContent = `${items.length} item${items.length !== 1 ? 's' : ''}`;
+  const el = document.getElementById('pub-grid');
 
-  const sec  = document.getElementById('sec-pub');
-  const grid = document.getElementById('pub-grid');
+  if (!items.length) { el.innerHTML = `<div class="empty-st">Nothing published yet.</div>`; return; }
 
-  if (statusFilter !== 'all' && statusFilter !== 'Published') {
-    sec.classList.add('hidden'); return;
-  }
-  sec.classList.remove('hidden');
-
-  if (!items.length) {
-    grid.innerHTML = `<div class="empty-st">Nothing published yet.</div>`;
-    return;
-  }
-
-  grid.innerHTML = items.map(item => {
+  el.innerHTML = items.map(item => {
+    const color = teamColor(item.team);
     const d = itemDate(item);
-    const clickHandler = isAuthenticated() ? `onclick="openEditItem(${item.id})"` : '';
-    return `<div class="pub-card" ${clickHandler}>
-      <div class="pub-title">${item.title}</div>
+    const pv = pvFmt(item.pageviews);
+    const clickAttr = isAuthenticated() ? `onclick="openEditItem(${item.id})"` : '';
+    return `<div class="pub-card" ${clickAttr}>
+      <div class="pub-card-top">
+        <div class="pub-color-strip" style="background:${color}"></div>
+        <div class="pub-title">${item.title}</div>
+      </div>
       <div class="pub-meta">
         ${tBadge(item.team)}
-        ${fBadge(item.format)}
-        <span style="font-family:var(--fm);font-size:8px;color:var(--t3)">${fmtDateLong(d)}</span>
-        ${item.owner ? `<span style="font-family:var(--fm);font-size:8px;color:var(--t4)">${item.owner}</span>` : ''}
+        ${item.format ? `<span class="fb-tag">${item.format}</span>` : ''}
+        <span style="font-family:var(--fm);font-size:9px;color:var(--t3)">${fmtDateLong(d)}</span>
       </div>
       ${item.description ? `<div class="pub-desc">${item.description}</div>` : ''}
       <div class="pub-foot">
         ${item.drive_link ? `<a href="${item.drive_link}" class="pub-link" target="_blank" onclick="event.stopPropagation()">Drive ↗</a>` : ''}
         ${item.live_link && item.live_link !== '#' ? `<a href="${item.live_link}" class="pub-link" target="_blank" onclick="event.stopPropagation()">Live ↗</a>` : ''}
-        <div class="pub-pv">${item.pageviews != null ? `<strong>${Number(item.pageviews).toLocaleString()}</strong> views` : '<span style="color:var(--t4)">pending GA</span>'}</div>
+        <div class="pub-pv">${pv ? `<strong>${pv}</strong> views` : `<span style="color:var(--t3)">pending GA</span>`}</div>
       </div>
     </div>`;
   }).join('');
 }
 
 // ═══════════════════════════════════════════════════════
-//  RENDER: TICKER + BOTTOM BAR
+//  RENDER: PIPELINE TABLE
+// ═══════════════════════════════════════════════════════
+function renderPipeline() {
+  let items = isAuthenticated() ? data : data.filter(d => d.team !== 'Internal');
+  if (plTeamFilter !== 'all')   items = items.filter(d => d.team === plTeamFilter);
+  if (plStatusFilter !== 'all') items = items.filter(d => d.status === plStatusFilter);
+  const statusOrder = {'In Production':0,'In Review':1,'Upcoming':2,'Planned':3,'Published':4};
+  items.sort((a,b) => { const so = (statusOrder[a.status]||5)-(statusOrder[b.status]||5); return so || (itemDate(a)||'9999').localeCompare(itemDate(b)||'9999'); });
+
+  document.getElementById('pl-count').textContent = `${items.length} item${items.length !== 1 ? 's' : ''}`;
+  const tbody = document.getElementById('pl-tbody');
+
+  if (!items.length) { tbody.innerHTML = `<tr><td colspan="9"><div class="empty-st">No items match.</div></td></tr>`; return; }
+
+  tbody.innerHTML = items.map((item, i) => {
+    const tc = teamCls(item.team);
+    const color = teamColor(item.team);
+    const d = itemDate(item);
+    const p = Math.min(100, Math.max(0, item.progress || 0));
+    const pv = pvFmt(item.pageviews);
+    const clickAttr = isAuthenticated() ? `onclick="openEditItem(${item.id})"` : '';
+    return `<tr ${clickAttr}>
+      <td class="col-mono" style="color:var(--t3)">${String(i+1).padStart(2,'0')}</td>
+      <td class="col-title"><span class="col-title-text">${item.title}</span></td>
+      <td>${tBadge(item.team)}</td>
+      <td>${item.format ? `<span class="fb-tag">${item.format}</span>` : '—'}</td>
+      <td class="col-mono">${item.owner||'—'}</td>
+      <td class="col-date ${dueCls(d)}">${fmtDate(d)}</td>
+      <td>${sBadge(item.status)}</td>
+      <td>
+        ${item.progress != null ? `<div class="tbl-prog">
+          <div class="tbl-prog-bar"><div class="tbl-prog-fill fill-${tc}" style="width:${p}%"></div></div>
+          <span class="col-mono" style="width:26px;text-align:right">${p}%</span>
+        </div>` : '<span style="font-family:var(--fm);font-size:10px;color:var(--t3)">—</span>'}
+      </td>
+      <td class="tbl-pv">${pv ? pv : `<span style="color:var(--t3)">—</span>`}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+//  RENDER: TICKER
 // ═══════════════════════════════════════════════════════
 function renderTicker() {
   const td = isAuthenticated() ? data : data.filter(d => d.team !== 'Internal');
   const snippets = [
-    ...td.filter(d => d.status==='In Production').map(d => `● IN PRODUCTION — ${d.title}${d.progress ? ` · ${d.progress}%` : ''}`),
-    ...td.filter(d => d.status==='In Review').map(d => `◈ IN REVIEW — ${d.title}`),
-    ...td.filter(d => d.status==='Published').slice(0,4).map(d => `✓ PUBLISHED — ${d.title}`),
-    ...td.filter(d => d.status==='Upcoming').slice(0,4).map(d => `◆ UPCOMING — ${d.title} · ${fmtDate(itemDate(d))}`),
+    ...td.filter(d => d.status==='In Production').map(d => `● ${d.title}${d.progress?` · ${d.progress}%`:''}`),
+    ...td.filter(d => d.status==='In Review').map(d => `◈ In Review — ${d.title}`),
+    ...td.filter(d => d.status==='Published').slice(0,4).map(d => `✓ Published — ${d.title}`),
+    ...td.filter(d => d.status==='Upcoming').slice(0,4).map(d => `◆ ${d.title} · ${fmtDate(itemDate(d))}`),
   ];
   if (!snippets.length) return;
-  const html = snippets.map(s => `<span class="ticker-item">${s}<span class="ticker-sep"> / </span></span>`).join('');
+  const html = snippets.map(s => `<span class="ticker-item">${s}<span class="ticker-sep"> · </span></span>`).join('');
   document.getElementById('ticker-inner').innerHTML = html + html;
-
   const bbCount = document.getElementById('bb-count');
-  if (bbCount) bbCount.textContent = `${td.length} asset${td.length!==1?'s':''}`;
+  if (bbCount) bbCount.textContent = `${td.length} asset${td.length !== 1 ? 's' : ''}`;
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1208,9 +1296,13 @@ function renderTicker() {
 // ═══════════════════════════════════════════════════════
 function renderAll() {
   renderMetrics();
-  renderActive();
-  renderQueue();
-  renderPublished();
+  if (currentView !== 'pipeline') {
+    renderActive();
+    renderUpNext();
+    renderPublished();
+  } else {
+    renderPipeline();
+  }
   renderTicker();
   updateAuthUI();
 }
@@ -1220,10 +1312,10 @@ function renderAll() {
 // ═══════════════════════════════════════════════════════
 function updateClock() {
   const now = new Date();
-  const el = document.getElementById('hdr-clock');
-  if (el) el.textContent = now.toLocaleTimeString('en-US', {hour12:false, hour:'2-digit', minute:'2-digit'});
-  const dEl = document.getElementById('bb-date');
-  if (dEl) dEl.textContent = now.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+  const cl = document.getElementById('tb-clock');
+  if (cl) cl.textContent = now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', hour12:false});
+  const dd = document.getElementById('bb-date');
+  if (dd) dd.textContent = now.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1255,9 +1347,7 @@ const FIELD_MAP = {
 
 function canonicalize(header) {
   const h = header.toLowerCase().trim();
-  for (const [canon, aliases] of Object.entries(FIELD_MAP)) {
-    if (aliases.includes(h)) return canon;
-  }
+  for (const [canon, aliases] of Object.entries(FIELD_MAP)) { if (aliases.includes(h)) return canon; }
   return null;
 }
 
@@ -1281,54 +1371,44 @@ function importData() {
     obj.team   = normalizeTeam(obj.team);
     obj.status = obj.status || 'Upcoming';
     obj.format = obj.format || 'Blog';
-    if (obj.pageviews) obj.pageviews = parseInt(obj.pageviews) || undefined;
-    else delete obj.pageviews;
+    if (obj.pageviews) obj.pageviews = parseInt(obj.pageviews) || undefined; else delete obj.pageviews;
     obj.id = maxId + i;
     imported.push(obj);
   }
-  if (!imported.length) { showImportResult(`No valid rows found. Errors: ${errors.join('; ')}`, true); return; }
-  if (mode === 'replace') data = imported;
-  else data = [...data, ...imported];
+  if (!imported.length) { showImportResult(`No valid rows. Errors: ${errors.join('; ')}`, true); return; }
+  if (mode === 'replace') data = imported; else data = [...data, ...imported];
   nextId = data.reduce((m,d) => Math.max(m, d.id||0), 200) + 1;
   saveData(); renderAll();
-  showImportResult(`✓ Imported ${imported.length} item${imported.length!==1?'s':''}${errors.length ? ` · ${errors.length} row${errors.length!==1?'s':''} skipped` : ''}`, false);
+  showImportResult(`✓ Imported ${imported.length} item${imported.length!==1?'s':''}${errors.length?` · ${errors.length} skipped`:''}`, false);
 }
 
 function parseCSVLine(line) {
   const res = []; let cur = '', inQ = false;
-  for (const c of line) {
-    if (c === '"') { inQ = !inQ; continue; }
-    if (c === ',' && !inQ) { res.push(cur); cur = ''; continue; }
-    cur += c;
-  }
-  res.push(cur);
-  return res;
+  for (const c of line) { if (c==='"'){inQ=!inQ;continue;} if(c===','&&!inQ){res.push(cur);cur='';continue;} cur+=c; }
+  res.push(cur); return res;
 }
-
 function normalizeTeam(t) {
   if (!t) return 'Internal';
   const tl = t.toLowerCase();
-  if (tl.includes('pan') || tl.includes('blast')) return 'PAN Blast';
-  if (tl.includes('97') || tl.includes('floor')) return '97th Floor';
-  if (tl.includes('internal') || tl.includes('employee')) return 'Internal';
+  if (tl.includes('pan')||tl.includes('blast')) return 'PAN Blast';
+  if (tl.includes('97')||tl.includes('floor')) return '97th Floor';
+  if (tl.includes('internal')||tl.includes('employee')) return 'Internal';
   return t;
 }
-
 function showImportResult(msg, isErr) {
   const el = document.getElementById('import-result');
-  el.style.display = '';
-  el.textContent = msg;
-  el.className = 'import-result' + (isErr ? ' error' : '');
+  el.style.display=''; el.textContent=msg;
+  el.className='import-result'+(isErr?' error':'');
 }
 
 // ═══════════════════════════════════════════════════════
-//  ADD / EDIT MODAL
+//  ADD / EDIT
 // ═══════════════════════════════════════════════════════
 let currentEditId = null;
 
 function openAddModal() {
   currentEditId = null;
-  document.getElementById('edit-modal-title').textContent = '+ Add Asset';
+  document.getElementById('edit-modal-title').textContent = 'Add Asset';
   document.getElementById('edit-delete-btn').style.display = 'none';
   ['edit-title','edit-owner','edit-pillar','edit-audience','edit-desc','edit-notes','edit-keywords','edit-drive','edit-url'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('edit-team').value = 'PAN Blast';
@@ -1361,22 +1441,11 @@ function openEditItem(id) {
   document.getElementById('edit-drive').value     = item.drive_link || '';
   document.getElementById('edit-url').value       = item.live_link || '';
   document.getElementById('edit-pageviews').value = item.pageviews != null ? item.pageviews : '';
-
-  // Show read-only footer for locked users
   const authd = isAuthenticated();
   document.querySelector('.modal-footer.admin-only').style.display = authd ? '' : 'none';
   document.getElementById('edit-ro-footer').style.display = authd ? 'none' : '';
-
-  // Make fields read-only when locked
-  ['edit-title','edit-owner','edit-pillar','edit-audience','edit-desc','edit-notes','edit-keywords','edit-drive','edit-url','edit-date','edit-progress','edit-pageviews'].forEach(fid => {
-    const el = document.getElementById(fid);
-    if (el) el.readOnly = !authd;
-  });
-  ['edit-team','edit-status','edit-format'].forEach(fid => {
-    const el = document.getElementById(fid);
-    if (el) el.disabled = !authd;
-  });
-
+  ['edit-title','edit-owner','edit-pillar','edit-audience','edit-desc','edit-notes','edit-keywords','edit-drive','edit-url','edit-date','edit-progress','edit-pageviews'].forEach(fid => { const el = document.getElementById(fid); if(el) el.readOnly = !authd; });
+  ['edit-team','edit-status','edit-format'].forEach(fid => { const el = document.getElementById(fid); if(el) el.disabled = !authd; });
   openModal('modal-edit');
 }
 
@@ -1384,35 +1453,31 @@ function saveEditItem() {
   const title = document.getElementById('edit-title').value.trim();
   if (!title) { alert('Asset Title is required.'); return; }
   const status = document.getElementById('edit-status').value;
-  const date   = document.getElementById('edit-date').value;
-  const pv     = document.getElementById('edit-pageviews').value;
-  const prog   = document.getElementById('edit-progress').value;
+  const date = document.getElementById('edit-date').value;
+  const pv = document.getElementById('edit-pageviews').value;
+  const prog = document.getElementById('edit-progress').value;
   const obj = {
-    title,
-    team:        document.getElementById('edit-team').value,
-    status,
-    format:      document.getElementById('edit-format').value,
-    owner:       document.getElementById('edit-owner').value.trim(),
-    pillar:      document.getElementById('edit-pillar').value.trim(),
-    audience:    document.getElementById('edit-audience').value.trim(),
+    title, team: document.getElementById('edit-team').value, status,
+    format: document.getElementById('edit-format').value,
+    owner: document.getElementById('edit-owner').value.trim(),
+    pillar: document.getElementById('edit-pillar').value.trim(),
+    audience: document.getElementById('edit-audience').value.trim(),
     description: document.getElementById('edit-desc').value.trim(),
-    notes:       document.getElementById('edit-notes').value.trim(),
-    keywords:    document.getElementById('edit-keywords').value.trim(),
-    drive_link:  document.getElementById('edit-drive').value.trim(),
-    live_link:   document.getElementById('edit-url').value.trim(),
+    notes: document.getElementById('edit-notes').value.trim(),
+    keywords: document.getElementById('edit-keywords').value.trim(),
+    drive_link: document.getElementById('edit-drive').value.trim(),
+    live_link: document.getElementById('edit-url').value.trim(),
     target_pub_date: status !== 'Published' ? date : '',
-    publish_date:    status === 'Published' ? date : '',
-    progress:    prog !== '' ? parseInt(prog) : undefined,
-    pageviews:   pv !== '' ? parseInt(pv) : undefined,
+    publish_date:    status === 'Published'  ? date : '',
+    progress:  prog !== '' ? parseInt(prog) : undefined,
+    pageviews: pv   !== '' ? parseInt(pv)   : undefined,
   };
   let savedItem;
   if (currentEditId != null) {
     const idx = data.findIndex(d => d.id === currentEditId);
-    if (idx !== -1) { data[idx] = { ...data[idx], ...obj }; savedItem = data[idx]; }
+    if (idx !== -1) { data[idx] = {...data[idx], ...obj}; savedItem = data[idx]; }
   } else {
-    obj.id = nextId++;
-    data.push(obj);
-    savedItem = obj;
+    obj.id = nextId++; data.push(obj); savedItem = obj;
   }
   saveData(); renderAll(); closeModal('modal-edit');
   if (savedItem) syncItemToGAS(savedItem);
@@ -1428,7 +1493,7 @@ function deleteCurrentItem() {
 }
 
 // ═══════════════════════════════════════════════════════
-//  AUTH — INTERNAL ACCESS GATE
+//  AUTH
 // ═══════════════════════════════════════════════════════
 const INTERNAL_PW_HASH = '85b42e1702877c851eb7412fe958c8fb447c3207b4798fadab42ea8539046ce1';
 
@@ -1436,7 +1501,6 @@ async function _hashPw(pw) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
-
 function isAuthenticated() { return sessionStorage.getItem('cf_auth') === '1'; }
 
 async function submitLock() {
@@ -1459,9 +1523,8 @@ async function submitLock() {
 function toggleLock() {
   if (isAuthenticated()) {
     sessionStorage.removeItem('cf_auth');
-    // Reset to all-teams filter if currently on Internal
-    if (teamFilter === 'Internal') setTeamFilter('all');
-    renderAll();
+    if (currentView === 'int') setView('dashboard');
+    else renderAll();
   } else {
     document.getElementById('lock-pw').value = '';
     document.getElementById('lock-error').style.display = 'none';
@@ -1474,7 +1537,7 @@ function updateAuthUI() {
   document.body.classList.toggle('locked', !auth);
   const lockBtn = document.getElementById('btn-lock');
   if (lockBtn) {
-    lockBtn.textContent = auth ? '🔓 Internal: Active' : '🔒 Internal';
+    lockBtn.textContent = auth ? '🔓 Internal: On' : '🔒 Internal';
     lockBtn.classList.toggle('unlocked', auth);
   }
 }
@@ -1484,46 +1547,27 @@ function updateAuthUI() {
 // ═══════════════════════════════════════════════════════
 let GAS_URL       = localStorage.getItem('cf_gas_url') || 'https://script.google.com/macros/s/AKfycbywBL_7NnK_Ow7Ph1N_t4HFJQVkaxbUp_VpdKgipOnXC8ZD_WimSigoHJfN_C8s76A/exec';
 let syncIntervalS = parseInt(localStorage.getItem('cf_sync_interval') || '30', 10);
-let _syncTimer    = null;
-let _lastSyncTs   = null;
-let _syncState    = 'idle';
+let _syncTimer = null, _lastSyncTs = null, _syncState = 'idle';
 
 function setSyncState(state, msg) {
   _syncState = state;
-  const dot = document.querySelector('#sync-indicator .sync-dot');
+  const dot = document.getElementById('sync-dot');
   const lbl = document.getElementById('sync-lbl');
   if (dot) dot.className = 'sync-dot ' + state;
   if (!lbl) return;
-  const labels = {
-    idle:    '—',
-    syncing: 'syncing…',
-    ok:      msg || ('synced ' + (_lastSyncTs ? _timeAgo(_lastSyncTs) : '')),
-    error:   msg || 'sync error',
-    offline: 'offline',
-  };
-  lbl.style.color = state === 'ok' ? 'var(--green)' : state === 'error' ? 'var(--accent)' : state === 'syncing' ? 'var(--yellow)' : 'var(--t4)';
+  const labels = { idle:'not synced', syncing:'syncing…', ok: msg || ('synced ' + (_lastSyncTs ? _timeAgo(_lastSyncTs) : '')), error: msg || 'sync error', offline:'offline' };
+  lbl.style.color = state==='ok' ? 'var(--green)' : state==='error' ? 'var(--red)' : state==='syncing' ? 'var(--amber)' : 'var(--t3)';
   lbl.textContent = labels[state] || state;
 }
-
-function _timeAgo(ts) {
-  const s = Math.floor((Date.now() - ts) / 1000);
-  if (s < 60) return 'just now';
-  const m = Math.floor(s / 60);
-  if (m < 60) return m + 'm ago';
-  return Math.floor(m / 60) + 'h ago';
-}
-
-setInterval(() => { if (_syncState === 'ok') setSyncState('ok'); }, 30000);
-
-function _encodePayload(obj) {
-  return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
-}
+function _timeAgo(ts) { const s=Math.floor((Date.now()-ts)/1000); if(s<60)return'just now'; const m=Math.floor(s/60); if(m<60)return m+'m ago'; return Math.floor(m/60)+'h ago'; }
+setInterval(() => { if (_syncState==='ok') setSyncState('ok'); }, 30000);
+function _encodePayload(obj) { return btoa(unescape(encodeURIComponent(JSON.stringify(obj)))); }
 
 async function callGAS(action, payload = null) {
-  if (!GAS_URL) throw new Error('No GAS URL configured');
+  if (!GAS_URL) throw new Error('No GAS URL');
   let url = GAS_URL + '?action=' + encodeURIComponent(action);
   if (payload) url += '&data=' + encodeURIComponent(_encodePayload(payload));
-  const resp = await fetch(url, { redirect: 'follow' });
+  const resp = await fetch(url, { redirect:'follow' });
   if (!resp.ok) throw new Error('HTTP ' + resp.status);
   const result = await resp.json();
   if (result.error) throw new Error(result.error);
@@ -1534,7 +1578,7 @@ async function syncFromSheets() {
   if (!GAS_URL) { setSyncState('offline'); return; }
   setSyncState('syncing');
   const btn = document.getElementById('sync-btn');
-  if (btn) { btn.disabled = true; btn.textContent = '↻ …'; }
+  if (btn) { btn.disabled=true; btn.textContent='↻ …'; }
   try {
     const result = await callGAS('read');
     if (result.ok && Array.isArray(result.items)) {
@@ -1544,60 +1588,30 @@ async function syncFromSheets() {
       data.forEach(d => { if (d.id) localMap[d.id] = d; });
       data = result.items.map(item => {
         const local = localMap[item.id];
-        if (local) {
-          return Object.assign({}, item, {
-            progress:  item.progress  != null ? item.progress  : local.progress,
-            pageviews: item.pageviews != null ? item.pageviews : local.pageviews,
-          });
-        }
+        if (local) return Object.assign({}, item, { progress: item.progress!=null?item.progress:local.progress, pageviews: item.pageviews!=null?item.pageviews:local.pageviews });
         return item;
       }).concat(localOnly);
-      saveData();
-      renderAll();
-      _lastSyncTs = Date.now();
-      setSyncState('ok');
+      saveData(); renderAll(); _lastSyncTs = Date.now(); setSyncState('ok');
     }
-  } catch(e) {
-    console.warn('[CF] Sync error:', e.message);
-    setSyncState('error', 'error');
-  } finally {
-    if (btn) { btn.disabled = false; btn.textContent = '↻ Sync'; }
-  }
+  } catch(e) { console.warn('[CF] Sync error:', e.message); setSyncState('error', 'error'); }
+  finally { if (btn) { btn.disabled=false; btn.textContent='↻ Sync'; } }
 }
 
 async function syncItemToGAS(item) {
   if (!GAS_URL || !item) return;
-  try {
-    const result = await callGAS('write', item);
-    if (result.ok) {
-      if (result.id) item.id = result.id;
-      if (result.row) item._row = result.row;
-      saveData();
-      _lastSyncTs = Date.now();
-      setSyncState('ok');
-    }
-  } catch(e) {
-    console.warn('[CF] Write error:', e.message);
-    setSyncState('error', 'write error');
-  }
+  try { const r = await callGAS('write', item); if(r.ok){if(r.id)item.id=r.id; if(r.row)item._row=r.row; saveData(); _lastSyncTs=Date.now(); setSyncState('ok');} }
+  catch(e) { console.warn('[CF] Write error:', e.message); setSyncState('error','write error'); }
 }
 
 async function deleteItemFromGAS(item) {
   if (!GAS_URL || !item || !item._row) return;
-  try {
-    await callGAS('delete', item);
-    _lastSyncTs = Date.now();
-    setSyncState('ok');
-  } catch(e) {
-    console.warn('[CF] Delete error:', e.message);
-  }
+  try { await callGAS('delete', item); _lastSyncTs=Date.now(); setSyncState('ok'); }
+  catch(e) { console.warn('[CF] Delete error:', e.message); }
 }
 
 function startAutoSync() {
   if (_syncTimer) clearInterval(_syncTimer);
-  if (GAS_URL && syncIntervalS > 0) {
-    _syncTimer = setInterval(syncFromSheets, syncIntervalS * 1000);
-  }
+  if (GAS_URL && syncIntervalS > 0) _syncTimer = setInterval(syncFromSheets, syncIntervalS * 1000);
 }
 
 function openSettings() {
@@ -1611,54 +1625,34 @@ function openSettings() {
 
 async function testGasConnection() {
   const url = document.getElementById('settings-gas-url').value.trim();
-  if (!url) { _showTestResult('error', 'Enter a URL first'); return; }
-  _showTestResult('', '⏳ Testing…');
+  if (!url) { _showTestResult('error','Enter a URL first'); return; }
+  _showTestResult('','⏳ Testing…');
   try {
-    const resp = await fetch(url + '?action=read', { redirect: 'follow' });
+    const resp = await fetch(url+'?action=read', {redirect:'follow'});
     const json = await resp.json();
-    if (json.ok && Array.isArray(json.items)) {
-      _showTestResult('ok', '✓ Connected — ' + json.items.length + ' items found');
-    } else if (json.error) {
-      _showTestResult('error', '✗ ' + json.error);
-    } else {
-      _showTestResult('error', '✗ Unexpected response');
-    }
-  } catch(e) {
-    _showTestResult('error', '✗ ' + e.message);
-  }
+    if (json.ok && Array.isArray(json.items)) _showTestResult('ok','✓ Connected — '+json.items.length+' items found');
+    else if (json.error) _showTestResult('error','✗ '+json.error);
+    else _showTestResult('error','✗ Unexpected response');
+  } catch(e) { _showTestResult('error','✗ '+e.message); }
 }
-
-function _showTestResult(type, msg) {
-  const res = document.getElementById('gas-test-result');
-  if (!res) return;
-  res.style.display = '';
-  res.className = 'gas-test-result ' + type;
-  res.textContent = msg;
-}
+function _showTestResult(type, msg) { const r=document.getElementById('gas-test-result'); if(!r)return; r.style.display=''; r.className='gas-test-result '+type; r.textContent=msg; }
 
 function saveSettings() {
   GAS_URL = document.getElementById('settings-gas-url').value.trim();
   const sel = document.getElementById('settings-sync-interval');
-  syncIntervalS = sel ? parseInt(sel.value, 10) : 30;
+  syncIntervalS = sel ? parseInt(sel.value,10) : 30;
   localStorage.setItem('cf_gas_url', GAS_URL);
   localStorage.setItem('cf_sync_interval', String(syncIntervalS));
   closeModal('modal-settings');
-  if (GAS_URL) {
-    callGAS('init').catch(() => {});
-    syncFromSheets();
-    startAutoSync();
-  } else {
-    setSyncState('offline');
-  }
+  if (GAS_URL) { callGAS('init').catch(()=>{}); syncFromSheets(); startAutoSync(); }
+  else setSyncState('offline');
 }
 
 function disconnectSheets() {
   if (!confirm('Disconnect from Google Sheets? Local data is kept.')) return;
-  GAS_URL = '';
-  localStorage.removeItem('cf_gas_url');
+  GAS_URL = ''; localStorage.removeItem('cf_gas_url');
   if (_syncTimer) clearInterval(_syncTimer);
-  setSyncState('offline');
-  closeModal('modal-settings');
+  setSyncState('offline'); closeModal('modal-settings');
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1669,19 +1663,14 @@ renderAll();
 updateClock();
 setInterval(updateClock, 10000);
 
-if (GAS_URL) {
-  callGAS('init').catch(() => {});
-  syncFromSheets();
-  startAutoSync();
-} else {
-  setSyncState('offline');
-}
+if (GAS_URL) { callGAS('init').catch(()=>{}); syncFromSheets(); startAutoSync(); }
+else setSyncState('offline');
 
 document.querySelectorAll('.modal-overlay').forEach(el => {
   el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(el => el.classList.remove('open'));
+  if (e.key==='Escape') document.querySelectorAll('.modal-overlay.open').forEach(el => el.classList.remove('open'));
 });
 </script>
 </body>
