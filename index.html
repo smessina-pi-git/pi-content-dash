@@ -7,35 +7,39 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:          #0E1019;
-  --sb-bg:       #090B14;
-  --card:        #161924;
-  --card-h:      #1C1F30;
-  --row-h:       rgba(255,255,255,0.025);
-  --border:      rgba(255,255,255,0.06);
-  --border-hi:   rgba(255,255,255,0.12);
-  --t1: #ECEEF8;
-  --t2: #7A7F9D;
-  --t3: #3E4260;
-  --t4: #1E2038;
-  --indigo:      #7B6FFF;
-  --indigo-dim:  rgba(123,111,255,0.12);
-  --indigo-glow: rgba(123,111,255,0.20);
-  --green:       #0FD99A;
-  --green-dim:   rgba(15,217,154,0.10);
-  --blue:        #3D9EFF;
-  --blue-dim:    rgba(61,158,255,0.10);
-  --amber:       #F5A623;
-  --amber-dim:   rgba(245,166,35,0.10);
-  --pub:         #A78BFA;
-  --pub-dim:     rgba(167,139,250,0.10);
-  --pan:         #FF6B35;
-  --pan-dim:     rgba(255,107,53,0.10);
-  --f97:         #3D9EFF;
-  --f97-dim:     rgba(61,158,255,0.10);
-  --int:         #0FD99A;
-  --int-dim:     rgba(15,217,154,0.10);
-  --red:         #FF5757;
+  --bg:           #F4F5F9;
+  --sb-bg:        #FFFFFF;
+  --card:         #FFFFFF;
+  --card-h:       #F4F5F9;
+  --modal-bg:     #FFFFFF;
+  --input-bg:     #F9FAFB;
+  --row-h:        rgba(0,0,0,0.025);
+  --border:       rgba(0,0,0,0.08);
+  --border-hi:    rgba(0,0,0,0.14);
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:    0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  --t1: #111827;
+  --t2: #6B7280;
+  --t3: #9CA3AF;
+  --t4: #E5E7EB;
+  --primary:      #EF3340;
+  --primary-dim:  rgba(239,51,64,0.08);
+  --primary-glow: rgba(239,51,64,0.16);
+  --green:        #059669;
+  --green-dim:    rgba(5,150,105,0.10);
+  --blue:         #2563EB;
+  --blue-dim:     rgba(37,99,235,0.10);
+  --amber:        #D97706;
+  --amber-dim:    rgba(217,119,6,0.10);
+  --pub:          #7C3AED;
+  --pub-dim:      rgba(124,58,237,0.10);
+  --pan:          #EF3340;
+  --pan-dim:      rgba(239,51,64,0.10);
+  --f97:          #2563EB;
+  --f97-dim:      rgba(37,99,235,0.10);
+  --int:          #059669;
+  --int-dim:      rgba(5,150,105,0.10);
+  --red:          #EF3340;
   --fd: 'Manrope', sans-serif;
   --fb: 'DM Sans', sans-serif;
   --fm: 'JetBrains Mono', monospace;
@@ -45,12 +49,47 @@
   --r: 10px;
   --r-sm: 6px;
 }
+body.dark {
+  --bg:           #0E1019;
+  --sb-bg:        #090B14;
+  --card:         #161924;
+  --card-h:       #1C1F30;
+  --modal-bg:     #161924;
+  --input-bg:     rgba(0,0,0,0.30);
+  --row-h:        rgba(255,255,255,0.025);
+  --border:       rgba(255,255,255,0.06);
+  --border-hi:    rgba(255,255,255,0.12);
+  --shadow-sm:    none;
+  --shadow-md:    0 24px 80px rgba(0,0,0,0.60);
+  --t1: #ECEEF8;
+  --t2: #7A7F9D;
+  --t3: #3E4260;
+  --t4: #1E2038;
+  --primary-dim:  rgba(239,51,64,0.14);
+  --primary-glow: rgba(239,51,64,0.24);
+  --green:        #0FD99A;
+  --green-dim:    rgba(15,217,154,0.10);
+  --blue:         #3D9EFF;
+  --blue-dim:     rgba(61,158,255,0.10);
+  --amber:        #F5A623;
+  --amber-dim:    rgba(245,166,35,0.10);
+  --pub:          #A78BFA;
+  --pub-dim:      rgba(167,139,250,0.10);
+  --pan:          #FF6B35;
+  --pan-dim:      rgba(255,107,53,0.10);
+  --f97:          #3D9EFF;
+  --f97-dim:      rgba(61,158,255,0.10);
+  --int:          #0FD99A;
+  --int-dim:      rgba(15,217,154,0.10);
+  --red:          #FF5757;
+}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
-body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-size: 14px; overflow: hidden; display: flex; flex-direction: column; }
+body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-size: 14px; overflow: hidden; display: flex; flex-direction: column; transition: background 0.2s, color 0.2s; }
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 3px; }
+body.dark ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); }
 
 /* ═══ LAYOUT ═══ */
 #layout { display: flex; flex: 1; overflow: hidden; }
@@ -60,11 +99,14 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
   width: var(--sb-w);
   background: var(--sb-bg);
   border-right: 1px solid var(--border);
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   overflow-y: auto;
+  transition: background 0.2s, border-color 0.2s;
 }
+body.dark #sidebar { box-shadow: none; }
 .sb-logo {
   padding: 20px 18px 16px;
   border-bottom: 1px solid var(--border);
@@ -82,7 +124,7 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
 }
 .sb-logo-mark .logo-icon {
   width: 28px; height: 28px;
-  background: var(--indigo);
+  background: var(--primary);
   border-radius: 7px;
   display: flex; align-items: center; justify-content: center;
   font-size: 14px;
@@ -123,9 +165,9 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
   transition: all 0.15s;
   margin-bottom: 2px;
 }
-.nav-item:hover { background: rgba(255,255,255,0.04); color: var(--t1); }
-.nav-item.nav-active { background: var(--indigo-dim); color: var(--t1); font-weight: 600; }
-.nav-item.nav-active .nav-icon-box { background: var(--indigo); color: #fff; }
+.nav-item:hover { background: var(--card-h); color: var(--t1); }
+.nav-item.nav-active { background: var(--primary-dim); color: var(--t1); font-weight: 600; }
+.nav-item.nav-active .nav-icon-box { background: var(--primary); color: #fff; }
 .nav-icon-box {
   width: 26px; height: 26px;
   border-radius: 6px;
@@ -153,7 +195,7 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
   padding: 1px 6px;
   border-radius: 10px;
 }
-.nav-item.nav-active .nav-badge { background: var(--indigo-glow); color: var(--indigo); }
+.nav-item.nav-active .nav-badge { background: var(--primary-glow); color: var(--primary); }
 .sb-bottom {
   padding: 10px 10px 14px;
   border-top: 1px solid var(--border);
@@ -208,8 +250,8 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
   white-space: nowrap;
 }
 .btn:hover { background: rgba(255,255,255,0.09); color: var(--t1); border-color: var(--border-hi); }
-.btn.primary { background: var(--indigo); border-color: var(--indigo); color: #fff; font-weight: 600; }
-.btn.primary:hover { background: #8E83FF; border-color: #8E83FF; }
+.btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; font-weight: 600; }
+.btn.primary:hover { background: #C8202C; border-color: #C8202C; }
 .btn.sm { padding: 5px 11px; font-size: 11px; }
 .btn-lock { font-size: 11px; }
 .btn-lock.unlocked { background: var(--int-dim); border-color: var(--int); color: var(--int); }
@@ -217,51 +259,46 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
 /* ═══ CONTENT SCROLL ═══ */
 #content-scroll { flex: 1; overflow-y: auto; padding: 24px; }
 
-/* ═══ METRIC CARDS ═══ */
-.metrics-row {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
+/* ═══ METRIC PILLS ═══ */
+.metrics-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
-.metric-card {
+.metric-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 20px;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 18px 18px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: border-color 0.15s, transform 0.15s;
   cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--fb);
+  font-size: 12px;
+  color: var(--t2);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
 }
-.metric-card:hover { border-color: var(--border-hi); transform: translateY(-1px); }
-.metric-card.m-active { border-color: var(--indigo); background: var(--indigo-dim); }
-.metric-top { display: flex; align-items: center; justify-content: space-between; }
-.metric-icon {
-  width: 34px; height: 34px;
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
+.metric-pill:hover { border-color: var(--border-hi); color: var(--t1); transform: translateY(-1px); }
+.metric-pill.mp-active { border-color: var(--primary); background: var(--primary-dim); color: var(--primary); }
+.mp-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.mp-num {
+  font-family: var(--fm);
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--t4);
+  color: var(--t1);
+  padding: 1px 7px;
+  border-radius: 9px;
+  min-width: 20px;
+  text-align: center;
 }
-.mi-prod   { background: var(--green-dim);  color: var(--green); }
-.mi-review { background: var(--blue-dim);   color: var(--blue); }
-.mi-up     { background: var(--amber-dim);  color: var(--amber); }
-.mi-plan   { background: rgba(255,255,255,0.05); color: var(--t3); }
-.mi-pub    { background: var(--pub-dim);    color: var(--pub); }
-.metric-num {
-  font-family: var(--fd);
-  font-weight: 800;
-  font-size: 30px;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-.mn-prod   { color: var(--green); }
-.mn-review { color: var(--blue); }
-.mn-up     { color: var(--amber); }
-.mn-plan   { color: var(--t2); }
-.mn-pub    { color: var(--pub); }
-.metric-label { font-size: 12px; color: var(--t2); font-weight: 500; }
+.metric-pill.mp-active .mp-num { background: var(--primary-glow); color: var(--primary); }
 
 /* ═══ DASHBOARD GRID ═══ */
 .dash-grid {
@@ -275,6 +312,7 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
   border: 1px solid var(--border);
   border-radius: var(--r);
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 .sc-head {
   display: flex;
@@ -382,6 +420,7 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-shadow: var(--shadow-sm);
 }
 .pub-card:hover { border-color: var(--border-hi); transform: translateY(-1px); }
 .pub-card-top { display: flex; gap: 10px; align-items: flex-start; }
@@ -392,7 +431,7 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
 .pub-foot { display: flex; align-items: center; gap: 8px; }
 .pub-pv { font-family: var(--fm); font-size: 10px; color: var(--t2); margin-left: auto; }
 .pub-pv strong { color: var(--t1); font-weight: 600; }
-.pub-link { font-family: var(--fm); font-size: 9px; color: var(--indigo); text-decoration: none; }
+.pub-link { font-family: var(--fm); font-size: 9px; color: var(--primary); text-decoration: none; }
 .pub-link:hover { text-decoration: underline; }
 
 /* ═══ PIPELINE VIEW ═══ */
@@ -453,7 +492,65 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
 .tbl-pv { font-family: var(--fm); font-size: 10px; color: var(--t2); text-align: right; }
 
 /* Table wrapper */
-.table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+.table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-sm); }
+
+/* ═══ CALENDAR VIEW ═══ */
+#view-calendar { display: none; }
+.cal-group { margin-bottom: 28px; }
+.cal-past { opacity: 0.55; }
+.cal-month-head {
+  font-family: var(--fd);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--t2);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.cal-today-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.cal-today-label {
+  font-family: var(--fm);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  white-space: nowrap;
+}
+.cal-today-rule { flex: 1; height: 1px; background: var(--primary); opacity: 0.3; }
+.cal-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: border-color 0.12s, box-shadow 0.12s;
+  box-shadow: var(--shadow-sm);
+}
+.cal-row:hover { border-color: var(--border-hi); transform: translateY(-1px); }
+.cal-row.overdue { border-left: 3px solid var(--red); padding-left: 11px; }
+.cal-row.soon    { border-left: 3px solid var(--amber); padding-left: 11px; }
+.cal-date {
+  font-family: var(--fm);
+  font-size: 11px;
+  color: var(--t2);
+  min-width: 128px;
+  white-space: nowrap;
+}
+.cal-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cal-title { flex: 1; font-size: 13px; font-weight: 500; color: var(--t1); min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cal-meta { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.cal-owner { font-family: var(--fm); font-size: 10px; color: var(--t3); white-space: nowrap; min-width: 80px; text-align: right; }
 
 /* ═══ EMPTY STATE ═══ */
 .empty-st { padding: 40px 20px; text-align: center; color: var(--t3); font-family: var(--fm); font-size: 11px; }
@@ -469,7 +566,7 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
   overflow: hidden;
 }
 .dispatch-label {
-  background: var(--indigo);
+  background: var(--primary);
   color: #fff;
   font-family: var(--fm);
   font-size: 8px;
@@ -509,8 +606,8 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
 /* ═══ MODALS ═══ */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.80); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
 .modal-overlay.open { display: flex; }
-.modal { background: #161924; border: 1px solid var(--border-hi); border-radius: var(--r); width: 720px; max-width: 96vw; max-height: 88vh; display: flex; flex-direction: column; box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
-.modal.modal-indigo { border-color: var(--indigo); }
+.modal { background: var(--modal-bg); border: 1px solid var(--border-hi); border-radius: var(--r); width: 720px; max-width: 96vw; max-height: 88vh; display: flex; flex-direction: column; box-shadow: var(--shadow-md); }
+.modal.modal-primary { border-color: var(--primary); }
 .modal.modal-blue   { border-color: var(--blue); }
 .modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .modal-title { font-family: var(--fd); font-size: 14px; font-weight: 700; color: var(--t1); flex: 1; }
@@ -523,9 +620,9 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
 
 .form-group { margin-bottom: 14px; }
 .form-label { font-family: var(--fm); font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--t3); display: block; margin-bottom: 5px; }
-.form-input, .form-select, .form-textarea { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border-hi); color: var(--t1); font-family: var(--fb); font-size: 13px; padding: 8px 12px; border-radius: var(--r-sm); outline: none; transition: border-color 0.12s; }
-.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--indigo); }
-.form-select option { background: #1C1F30; }
+.form-input, .form-select, .form-textarea { width: 100%; background: var(--input-bg); border: 1px solid var(--border-hi); color: var(--t1); font-family: var(--fb); font-size: 13px; padding: 8px 12px; border-radius: var(--r-sm); outline: none; transition: border-color 0.12s; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--primary); }
+.form-select option { background: var(--card); color: var(--t1); }
 .form-textarea { resize: vertical; min-height: 72px; line-height: 1.5; font-size: 13px; }
 .form-hint { font-family: var(--fm); font-size: 10px; color: var(--t3); margin-top: 4px; }
 .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -533,14 +630,14 @@ body { background: var(--bg); color: var(--t1); font-family: var(--fb); font-siz
 .form-full { grid-column: 1/-1; }
 
 .col-chip { font-family: var(--fm); font-size: 9px; padding: 2px 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--t3); border-radius: 4px; }
-.col-chip.req { border-color: var(--indigo); color: var(--indigo); }
+.col-chip.req { border-color: var(--primary); color: var(--primary); }
 .columns-legend { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
 .import-result { display: none; padding: 10px 14px; border: 1px solid var(--green); background: var(--green-dim); font-family: var(--fm); font-size: 11px; color: var(--green); border-radius: var(--r-sm); margin-top: 14px; }
 .import-result.error { border-color: var(--red); color: var(--red); background: rgba(255,87,87,0.07); }
 
 .setup-steps { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
 .setup-step { display: flex; gap: 12px; align-items: flex-start; }
-.setup-step-num { background: var(--indigo-dim); color: var(--indigo); border: 1px solid var(--indigo); width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; font-family: var(--fd); }
+.setup-step-num { background: var(--primary-dim); color: var(--primary); border: 1px solid var(--primary); width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; flex-shrink: 0; font-family: var(--fd); }
 .setup-step-text { font-family: var(--fb); font-size: 12px; color: var(--t2); line-height: 1.6; flex: 1; }
 .setup-step-text strong { color: var(--t1); }
 .setup-step-text code { background: rgba(0,0,0,0.4); border: 1px solid var(--border); padding: 1px 6px; color: var(--t1); font-size: 11px; border-radius: 4px; font-family: var(--fm); }
@@ -561,7 +658,17 @@ body.locked .f-int { display: none !important; }
   <aside id="sidebar">
     <div class="sb-logo">
       <div class="sb-logo-mark">
-        <div class="logo-icon">◈</div>
+        <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+          <circle cx="50" cy="50" r="50" fill="#EF3340"/>
+          <rect x="14" y="22" width="9" height="56" rx="2" fill="white"/>
+          <path d="M23 22 L23 50 L44 50 Q62 50 62 36 Q62 22 44 22 Z" fill="white"/>
+          <ellipse cx="42" cy="36" rx="11" ry="10" fill="#EF3340"/>
+          <rect x="66" y="22" width="18" height="6" rx="2" fill="white"/>
+          <rect x="71" y="28" width="8" height="16" rx="1.5" fill="white"/>
+          <circle cx="75" cy="50" r="5.5" fill="white"/>
+          <rect x="71" y="55.5" width="8" height="16.5" rx="1.5" fill="white"/>
+          <rect x="66" y="72" width="18" height="6" rx="2" fill="white"/>
+        </svg>
         Content Factory
       </div>
       <div class="sb-logo-sub">PI Brand Marketing</div>
@@ -577,6 +684,11 @@ body.locked .f-int { display: none !important; }
         <span class="nav-icon-box">≡</span>
         All Content
         <span class="nav-badge" id="nb-all">—</span>
+      </button>
+      <button class="nav-item" data-view="calendar" onclick="setView('calendar')">
+        <span class="nav-icon-box">◫</span>
+        Calendar
+        <span class="nav-badge" id="nb-cal">—</span>
       </button>
 
       <div class="sb-section-label">Teams</div>
@@ -621,6 +733,7 @@ body.locked .f-int { display: none !important; }
         <button class="btn sm admin-only" onclick="openImportModal()">⊕ Import</button>
         <button class="btn primary sm admin-only" onclick="openAddModal()">+ Add</button>
         <button class="btn btn-lock sm" id="btn-lock" onclick="toggleLock()">🔒 Internal</button>
+        <button class="btn sm" id="btn-theme" onclick="toggleDarkMode()" title="Toggle dark mode" style="font-size:14px;padding:5px 9px">🌙</button>
       </div>
     </div>
 
@@ -629,43 +742,33 @@ body.locked .f-int { display: none !important; }
 
       <!-- ── DASHBOARD VIEW ── -->
       <div id="view-dashboard">
-        <!-- Metric Cards -->
-        <div class="metrics-row">
-          <div class="metric-card" onclick="filterByStatus('In Production')">
-            <div class="metric-top">
-              <div class="metric-icon mi-prod">●</div>
-              <span class="metric-num mn-prod" id="mn-prod">0</span>
-            </div>
-            <div class="metric-label">In Production</div>
-          </div>
-          <div class="metric-card" onclick="filterByStatus('In Review')">
-            <div class="metric-top">
-              <div class="metric-icon mi-review">◈</div>
-              <span class="metric-num mn-review" id="mn-review">0</span>
-            </div>
-            <div class="metric-label">In Review</div>
-          </div>
-          <div class="metric-card" onclick="filterByStatus('Upcoming')">
-            <div class="metric-top">
-              <div class="metric-icon mi-up">◆</div>
-              <span class="metric-num mn-up" id="mn-up">0</span>
-            </div>
-            <div class="metric-label">Upcoming</div>
-          </div>
-          <div class="metric-card" onclick="filterByStatus('Planned')">
-            <div class="metric-top">
-              <div class="metric-icon mi-plan">○</div>
-              <span class="metric-num mn-plan" id="mn-plan">0</span>
-            </div>
-            <div class="metric-label">Planned</div>
-          </div>
-          <div class="metric-card" onclick="filterByStatus('Published')">
-            <div class="metric-top">
-              <div class="metric-icon mi-pub">✓</div>
-              <span class="metric-num mn-pub" id="mn-pub">0</span>
-            </div>
-            <div class="metric-label">Published</div>
-          </div>
+        <!-- Metric Pills -->
+        <div class="metrics-bar">
+          <button class="metric-pill" onclick="filterByStatus('In Production')">
+            <span class="mp-dot" style="background:var(--green)"></span>
+            In Production
+            <span class="mp-num" id="mn-prod">0</span>
+          </button>
+          <button class="metric-pill" onclick="filterByStatus('In Review')">
+            <span class="mp-dot" style="background:var(--blue)"></span>
+            In Review
+            <span class="mp-num" id="mn-review">0</span>
+          </button>
+          <button class="metric-pill" onclick="filterByStatus('Upcoming')">
+            <span class="mp-dot" style="background:var(--amber)"></span>
+            Upcoming
+            <span class="mp-num" id="mn-up">0</span>
+          </button>
+          <button class="metric-pill" onclick="filterByStatus('Planned')">
+            <span class="mp-dot" style="background:var(--t3)"></span>
+            Planned
+            <span class="mp-num" id="mn-plan">0</span>
+          </button>
+          <button class="metric-pill" onclick="filterByStatus('Published')">
+            <span class="mp-dot" style="background:var(--pub)"></span>
+            Published
+            <span class="mp-num" id="mn-pub">0</span>
+          </button>
         </div>
 
         <!-- Dashboard 2-col grid -->
@@ -733,6 +836,23 @@ body.locked .f-int { display: none !important; }
         </div>
       </div>
 
+      <!-- ── CALENDAR VIEW ── -->
+      <div id="view-calendar">
+        <div class="pl-filter-bar" style="margin-bottom:16px">
+          <span class="pl-label">Team</span>
+          <button class="pl-chip cactive" data-calteam="all" onclick="setCalTeamFilter('all')">All</button>
+          <button class="pl-chip cpan" data-calteam="PAN Blast" onclick="setCalTeamFilter('PAN Blast')">PAN Blast</button>
+          <button class="pl-chip cf97" data-calteam="97th Floor" onclick="setCalTeamFilter('97th Floor')">97th Floor</button>
+          <button class="pl-chip cint f-int" data-calteam="Internal" onclick="setCalTeamFilter('Internal')">Internal</button>
+          <span class="pl-sep"></span>
+          <label style="display:flex;align-items:center;gap:6px;font-family:var(--fm);font-size:10px;color:var(--t2);cursor:pointer">
+            <input type="checkbox" id="cal-upcoming-only" onchange="renderCalendar()" style="accent-color:var(--primary)"> Upcoming only
+          </label>
+          <span class="pl-count" id="cal-count">— items</span>
+        </div>
+        <div id="cal-list"></div>
+      </div>
+
     </div><!-- /content-scroll -->
   </div><!-- /main-wrap -->
 </div><!-- /layout -->
@@ -749,7 +869,7 @@ body.locked .f-int { display: none !important; }
 
 <!-- ═══ SETTINGS MODAL ═══ -->
 <div id="modal-settings" class="modal-overlay">
-  <div class="modal modal-indigo" style="width:640px">
+  <div class="modal modal-primary" style="width:640px">
     <div class="modal-header">
       <div class="modal-title">Google Sheets Connection</div>
       <button class="modal-close" onclick="closeModal('modal-settings')">✕</button>
@@ -798,13 +918,13 @@ body.locked .f-int { display: none !important; }
 
 <!-- ═══ IMPORT MODAL ═══ -->
 <div id="modal-import" class="modal-overlay">
-  <div class="modal modal-indigo">
+  <div class="modal modal-primary">
     <div class="modal-header">
       <div class="modal-title">Import from Spreadsheet</div>
       <button class="modal-close" onclick="closeModal('modal-import')">✕</button>
     </div>
     <div class="modal-body">
-      <p style="font-family:var(--fm);font-size:11px;color:var(--t2);margin-bottom:16px;line-height:1.7">Paste CSV from your spreadsheet. <strong style="color:var(--indigo)">Required:</strong> Asset Title + Team + Status</p>
+      <p style="font-family:var(--fm);font-size:11px;color:var(--t2);margin-bottom:16px;line-height:1.7">Paste CSV from your spreadsheet. <strong style="color:var(--primary)">Required:</strong> Asset Title + Team + Status</p>
       <div class="columns-legend">
         <div class="col-chip req">Asset Title</div><div class="col-chip req">Team</div><div class="col-chip req">Status</div>
         <div class="col-chip">Owner</div><div class="col-chip">Target publication date</div><div class="col-chip">Format</div>
@@ -943,13 +1063,13 @@ body.locked .f-int { display: none !important; }
 
 <!-- ═══ LOCK MODAL ═══ -->
 <div id="modal-lock" class="modal-overlay">
-  <div class="modal modal-indigo" style="width:360px">
+  <div class="modal modal-primary" style="width:360px">
     <div class="modal-header">
       <div class="modal-title">Internal Access</div>
       <button class="modal-close" onclick="closeModal('modal-lock')">✕</button>
     </div>
     <div class="modal-body" style="text-align:center;padding:32px 28px">
-      <div style="width:52px;height:52px;background:var(--indigo-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 18px">🔒</div>
+      <div style="width:52px;height:52px;background:var(--primary-dim);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 18px">🔒</div>
       <div style="font-family:var(--fb);font-size:13px;color:var(--t2);margin-bottom:20px;line-height:1.7">Enter the access code to unlock internal<br>team data and editing controls.</div>
       <input type="password" class="form-input" id="lock-pw" placeholder="Access code"
         style="text-align:center;letter-spacing:8px;font-size:18px;margin-bottom:8px"
@@ -1072,14 +1192,15 @@ function setView(view) {
     el.classList.toggle('nav-active', el.dataset.view === view);
   });
   // page title
-  const titles = { dashboard:'Dashboard', pipeline:'All Content', pan:'PAN Blast', '97f':'97th Floor', int:'Internal' };
+  const titles = { dashboard:'Dashboard', pipeline:'All Content', calendar:'Calendar', pan:'PAN Blast', '97f':'97th Floor', int:'Internal' };
   document.getElementById('page-title').textContent = titles[view] || 'Dashboard';
   // team filter from view
   const tmap = { pan:'PAN Blast', '97f':'97th Floor', int:'Internal' };
   viewTeamFilter = tmap[view] || 'all';
   // show/hide views
-  document.getElementById('view-dashboard').style.display = (view !== 'pipeline') ? '' : 'none';
+  document.getElementById('view-dashboard').style.display = (!['pipeline','calendar'].includes(view)) ? '' : 'none';
   document.getElementById('view-pipeline').style.display  = (view === 'pipeline') ? '' : 'none';
+  document.getElementById('view-calendar').style.display  = (view === 'calendar') ? '' : 'none';
   renderAll();
 }
 
@@ -1123,6 +1244,8 @@ function renderMetrics() {
   document.getElementById('nb-pan').textContent = panCount;
   document.getElementById('nb-97f').textContent = f97Count;
   document.getElementById('nb-int').textContent = intCount;
+  const calCount = vis.filter(d => itemDate(d)).length;
+  document.getElementById('nb-cal').textContent = calCount;
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1296,15 +1419,92 @@ function renderTicker() {
 // ═══════════════════════════════════════════════════════
 function renderAll() {
   renderMetrics();
-  if (currentView !== 'pipeline') {
+  if (currentView === 'pipeline') {
+    renderPipeline();
+  } else if (currentView === 'calendar') {
+    renderCalendar();
+  } else {
     renderActive();
     renderUpNext();
     renderPublished();
-  } else {
-    renderPipeline();
   }
   renderTicker();
   updateAuthUI();
+}
+
+// ═══════════════════════════════════════════════════════
+//  RENDER: CALENDAR
+// ═══════════════════════════════════════════════════════
+let calTeamFilter = 'all';
+
+function setCalTeamFilter(val) {
+  calTeamFilter = val;
+  document.querySelectorAll('.pl-chip[data-calteam]').forEach(c => c.classList.toggle('cactive', c.dataset.calteam === val));
+  renderCalendar();
+}
+
+function renderCalendar() {
+  const upcomingOnly = document.getElementById('cal-upcoming-only')?.checked;
+  const today = new Date().toISOString().substring(0, 10);
+
+  let items = isAuthenticated() ? data : data.filter(d => d.team !== 'Internal');
+  if (calTeamFilter !== 'all') items = items.filter(d => d.team === calTeamFilter);
+  items = items.filter(d => itemDate(d));
+  if (upcomingOnly) items = items.filter(d => itemDate(d) >= today);
+  items.sort((a, b) => (itemDate(a)||'9999').localeCompare(itemDate(b)||'9999'));
+
+  document.getElementById('cal-count').textContent = `${items.length} item${items.length !== 1 ? 's' : ''}`;
+  const el = document.getElementById('cal-list');
+  if (!items.length) { el.innerHTML = '<div class="empty-st">No dated items found.</div>'; return; }
+
+  // Group by month
+  const groups = {};
+  items.forEach(item => {
+    const key = itemDate(item).substring(0, 7);
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(item);
+  });
+
+  el.innerHTML = Object.entries(groups).map(([monthKey, groupItems]) => {
+    const d = new Date(monthKey + '-15T12:00:00');
+    const monthLabel = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    const isPast = monthKey < today.substring(0, 7);
+    const isCurrent = monthKey === today.substring(0, 7);
+
+    const rows = groupItems.map(item => {
+      const dateStr = itemDate(item);
+      const dayLabel = new Date(dateStr + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+      const isToday = dateStr === today;
+      const clickAttr = isAuthenticated() ? `onclick="openEditItem(${item.id})"` : '';
+      return `<div class="cal-row ${dueCls(dateStr)}" ${clickAttr}>
+        <div class="cal-date" style="${isToday ? 'color:var(--primary);font-weight:600' : ''}">${dayLabel}</div>
+        <div class="cal-dot" style="background:${teamColor(item.team)}"></div>
+        <div class="cal-title">${item.title}</div>
+        <div class="cal-meta">
+          ${tBadge(item.team)}
+          ${item.format ? `<span class="fb-tag">${item.format}</span>` : ''}
+          ${sBadge(item.status)}
+        </div>
+        ${item.owner ? `<span class="cal-owner">${item.owner}</span>` : '<span class="cal-owner"></span>'}
+      </div>`;
+    }).join('');
+
+    return `<div class="cal-group ${isPast ? 'cal-past' : ''}">
+      <div class="cal-month-head">${monthLabel}${isCurrent ? ' <span style="color:var(--primary);font-weight:700">· Now</span>' : ''}</div>
+      ${rows}
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+//  DARK MODE
+// ═══════════════════════════════════════════════════════
+function toggleDarkMode() {
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  localStorage.setItem('cf_dark', isDark ? '1' : '0');
+  const btn = document.getElementById('btn-theme');
+  if (btn) btn.textContent = isDark ? '☀' : '🌙';
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1662,6 +1862,13 @@ loadData();
 renderAll();
 updateClock();
 setInterval(updateClock, 10000);
+
+// Restore dark mode preference
+if (localStorage.getItem('cf_dark') === '1') {
+  document.body.classList.add('dark');
+  const btn = document.getElementById('btn-theme');
+  if (btn) btn.textContent = '☀';
+}
 
 if (GAS_URL) { callGAS('init').catch(()=>{}); syncFromSheets(); startAutoSync(); }
 else setSyncState('offline');
